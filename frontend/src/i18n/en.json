@@ -1,0 +1,75 @@
+{
+  "welcome": "Take better care of your pets",
+  "appName": "LaNature",
+  "login": "Login",
+  "register": "Create account",
+  "enter": "Enter",
+  "email": "Email",
+  "password": "Password",
+  "name": "Name",
+  "loading": "Loading...",
+  "dashboard": "Hello",
+  "pets": "Pets",
+  "routines": "Routines",
+  "history": "History",
+  "logout": "Logout",
+  "landing": {
+    "title": "Take care of your pets with",
+    "titleHighlight": "organization",
+    "subtitle": "Manage feeding, medication and care routines for your pets in a simple and efficient way.",
+    "cta": "Get started for free",
+    "features": {
+      "what": {
+        "title": "What it is",
+        "description": "Complete platform to manage all your pets' care in one place."
+      },
+      "who": {
+        "title": "Who it's for",
+        "description": "For pet owners who want to ensure their pets receive all care at the right time."
+      },
+      "benefits": {
+        "title": "Benefits",
+        "description": "Organize routines, track history and never forget to care for your pets again."
+      }
+    }
+  },
+  "auth": {
+    "loginTitle": "Sign in to your account",
+    "loginSubtitle": "Or",
+    "createAccount": "create a new account",
+    "registerTitle": "Create your account",
+    "registerSubtitle": "Or",
+    "alreadyHaveAccount": "already have an account",
+    "loginError": "Error logging in",
+    "registerError": "Error creating account"
+  },
+  "pets": {
+    "registered": "Registered Pets",
+    "none": "No pets registered yet.",
+    "manage": "Manage pets →",
+    "add": "Add Pet",
+    "edit": "Edit Pet",
+    "delete": "Delete Pet",
+    "create": "Create Pet",
+    "update": "Update Pet",
+    "species": "Species",
+    "birthDate": "Birth Date"
+  },
+  "routines": {
+    "nextCare": "Next Care of the Day",
+    "noneActive": "No active routines registered.",
+    "noneToday": "No routines scheduled for today.",
+    "viewAll": "View all routines →",
+    "create": "Create Routine",
+    "type": "Type",
+    "frequency": "Frequency",
+    "time": "Time",
+    "active": "Active"
+  },
+  "actions": {
+    "quickActions": "Quick Actions",
+    "addPet": "Add Pet",
+    "createRoutine": "Create Routine",
+    "viewHistory": "View History"
+  }
+}

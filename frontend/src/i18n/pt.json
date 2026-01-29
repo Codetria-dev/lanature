@@ -1,0 +1,75 @@
+{
+  "welcome": "Cuide melhor dos seus pets",
+  "appName": "LaNature",
+  "login": "Entrar",
+  "register": "Criar conta",
+  "enter": "Entrar",
+  "email": "Email",
+  "password": "Senha",
+  "name": "Nome",
+  "loading": "Carregando...",
+  "dashboard": "Hello",
+  "pets": "Pets",
+  "routines": "Rotinas",
+  "history": "Histórico",
+  "logout": "Sair",
+  "landing": {
+    "title": "Cuide dos seus pets com",
+    "titleHighlight": "organização",
+    "subtitle": "Gerencie rotinas de alimentação, medicação e cuidados dos seus pets de forma simples e eficiente.",
+    "cta": "Começar grátis",
+    "features": {
+      "what": {
+        "title": "O que é",
+        "description": "Plataforma completa para gerenciar todos os cuidados dos seus pets em um só lugar."
+      },
+      "who": {
+        "title": "Para quem",
+        "description": "Para tutores que querem garantir que seus pets recebam todos os cuidados na hora certa."
+      },
+      "benefits": {
+        "title": "Benefícios",
+        "description": "Organize rotinas, acompanhe histórico e nunca mais esqueça de cuidar dos seus pets."
+      }
+    }
+  },
+  "auth": {
+    "loginTitle": "Entre na sua conta",
+    "loginSubtitle": "Ou",
+    "createAccount": "crie uma nova conta",
+    "registerTitle": "Crie sua conta",
+    "registerSubtitle": "Ou",
+    "alreadyHaveAccount": "já possui uma conta",
+    "loginError": "Erro ao fazer login",
+    "registerError": "Erro ao criar conta"
+  },
+  "pets": {
+    "registered": "Pets Cadastrados",
+    "none": "Nenhum pet cadastrado ainda.",
+    "manage": "Gerenciar pets →",
+    "add": "Adicionar Pet",
+    "edit": "Editar Pet",
+    "delete": "Excluir Pet",
+    "create": "Criar Pet",
+    "update": "Atualizar Pet",
+    "species": "Espécie",
+    "birthDate": "Data de Nascimento"
+  },
+  "routines": {
+    "nextCare": "Próximos Cuidados do Dia",
+    "noneActive": "Nenhuma rotina ativa cadastrada.",
+    "noneToday": "Nenhuma rotina agendada para hoje.",
+    "viewAll": "Ver todas as rotinas →",
+    "create": "Criar Rotina",
+    "type": "Tipo",
+    "frequency": "Frequência",
+    "time": "Horário",
+    "active": "Ativo"
+  },
+  "actions": {
+    "quickActions": "Ações Rápidas",
+    "addPet": "Adicionar Pet",
+    "createRoutine": "Criar Rotina",
+    "viewHistory": "Ver Histórico"
+  }
+}
