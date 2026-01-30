@@ -21,7 +21,7 @@ try:
         admin = User(
             name="Admin",
             email="admin@lanature.com",
-            password_hash=get_password_hash("Admin123!"),
+            password_hash=get_password_hash("Admin123"),
             is_active=True,
             is_superuser=True
         )
@@ -30,7 +30,7 @@ try:
         db.commit()
         print("Admin criado com sucesso")
         print("Email: admin@lanature.com")
-        print("Password: Admin123!")
+        print("Password: Admin123")
 except Exception as e:
     db.rollback()
     print(f"[ERROR] Error creating admin user: {e}")
