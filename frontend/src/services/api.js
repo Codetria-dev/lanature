@@ -1,7 +1,11 @@
 import axios from 'axios';
 
+// Remove /api/v1 do final do baseURL se existir (para evitar duplicação)
+// As chamadas já incluem /api/v1 no path
+const baseURL = (import.meta.env.VITE_API_URL || '').replace(/\/api\/v1\/?$/, '');
+
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: baseURL,
 });
 
 // Interceptor para tratar erros de autenticação/autorização
