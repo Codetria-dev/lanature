@@ -12,55 +12,8 @@ import Admin from './pages/Admin'
 import Contact from './pages/Contact'
 import Layout from './components/Layout'
 import AdminLayout from './components/AdminLayout'
+import ProtectedRoute from './components/ProtectedRoute'
 import { t } from './i18n'
-
-function PrivateRoute({ children }) {
-  const { user, loading } = useAuth()
-  
-  if (loading) {
-    return <div className="flex items-center justify-center min-h-screen">{t('loading')}</div>
-  }
-  
-  return user ? children : <Navigate to="/login" />
-}
-
-function UserRoute({ children }) {
-  const { user, loading } = useAuth()
-  
-  if (loading) {
-    return <div className="flex items-center justify-center min-h-screen">{t('loading')}</div>
-  }
-  
-  if (!user) {
-    return <Navigate to="/login" />
-  }
-  
-  // Se for superuser, redireciona para admin
-  if (user.is_superuser === true) {
-    return <Navigate to="/admin" replace />
-  }
-  
-  return children
-}
-
-function AdminRoute({ children }) {
-  const { user, loading } = useAuth()
-  
-  if (loading) {
-    return <div className="flex items-center justify-center min-h-screen">{t('loading')}</div>
-  }
-  
-  if (!user) {
-    return <Navigate to="/login" />
-  }
-  
-  // Se não for superuser, redireciona para dashboard
-  if (user.is_superuser !== true) {
-    return <Navigate to="/dashboard" replace />
-  }
-  
-  return children
-}
 
 function PublicRoute({ children }) {
   const { user, loading } = useAuth()
@@ -71,7 +24,7 @@ function PublicRoute({ children }) {
   
   if (user) {
     // Se for superuser, redireciona para admin, senão para dashboard
-    return <Navigate to={user.is_superuser ? "/admin" : "/dashboard"} />
+    return <Navigate to={user.is_superuser ? "/admin" : "/dashboard"} replace />
   }
   
   return children
@@ -87,11 +40,51 @@ function App() {
           <Route path="/home" element={<LandingPage />} />
           <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
           <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
-          <Route path="/dashboard" element={<UserRoute><Layout><Dashboard /></Layout></UserRoute>} />
-          <Route path="/pets" element={<UserRoute><Layout><Pets /></Layout></UserRoute>} />
-          <Route path="/routines" element={<UserRoute><Layout><Routines /></Layout></UserRoute>} />
-          <Route path="/history" element={<UserRoute><Layout><History /></Layout></UserRoute>} />
-          <Route path="/admin" element={<AdminRoute><AdminLayout><Admin /></AdminLayout></AdminRoute>} />
+          
+          {/* Rotas protegidas - requerem usuário logado */}
+          <Route 
+            path="/dashboard" 
+            element={
+              <ProtectedRoute>
+                <Layout><Dashboard /></Layout>
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/pets" 
+            element={
+              <ProtectedRoute>
+                <Layout><Pets /></Layout>
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/routines" 
+            element={
+              <ProtectedRoute>
+                <Layout><Routines /></Layout>
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/history" 
+            element={
+              <ProtectedRoute>
+                <Layout><History /></Layout>
+              </ProtectedRoute>
+            } 
+          />
+          
+          {/* Rota admin - requer role admin */}
+          <Route 
+            path="/admin" 
+            element={
+              <ProtectedRoute requiredRole="admin" redirectTo="/dashboard">
+                <AdminLayout><Admin /></AdminLayout>
+              </ProtectedRoute>
+            } 
+          />
+          
           <Route path="/contact" element={<Layout><Contact /></Layout>} />
         </Routes>
       </Router>

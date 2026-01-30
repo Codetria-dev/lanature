@@ -30,8 +30,11 @@ export const AuthProvider = ({ children }) => {
       const response = await api.get('/api/v1/auth/me')
       setUser(response.data)
     } catch (error) {
+      // 401 ou 403 = token inválido ou usuário sem permissão
+      // Remove token e limpa estado
       localStorage.removeItem('token')
       delete api.defaults.headers.common['Authorization']
+      setUser(null)
     } finally {
       setLoading(false)
     }
