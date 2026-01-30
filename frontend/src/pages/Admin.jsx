@@ -3,7 +3,7 @@ import Card from '../components/ui/Card'
 import Button from '../components/ui/Button'
 import Alert from '../components/ui/Alert'
 import Input from '../components/ui/Input'
-import api from '../services/api'
+import { api } from '../services/api'
 import backgroundBg from '@assets/background.png'
 
 export default function Admin() {
