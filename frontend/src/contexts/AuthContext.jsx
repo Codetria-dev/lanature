@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
 
   const fetchUser = async () => {
     try {
-      const response = await api.get('/auth/me')
+      const response = await api.get('/api/v1/auth/me')
       setUser(response.data)
     } catch (error) {
       localStorage.removeItem('token')
@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   const login = async (email, password) => {
-    const response = await api.post('/auth/login', {
+    const response = await api.post('/api/v1/auth/login', {
       email,
       password
     })
@@ -57,7 +57,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   const register = async (name, email, password) => {
-    const response = await api.post('/auth/register', {
+    const response = await api.post('/api/v1/auth/register', {
       name,
       email,
       password

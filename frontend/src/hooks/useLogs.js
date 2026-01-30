@@ -11,11 +11,11 @@ export const useLogs = (filters = {}) => {
       setLoading(true)
       setError(null)
       
-      let url = '/logs/'
+      let url = '/api/v1/logs/'
       if (filters.petId && filters.petId !== 'all') {
-        url = `/logs/pet/${filters.petId}`
+        url = `/api/v1/logs/pet/${filters.petId}`
       } else if (filters.taskId) {
-        url = `/logs/task/${filters.taskId}`
+        url = `/api/v1/logs/task/${filters.taskId}`
       }
       
       const response = await api.get(url)
@@ -38,7 +38,7 @@ export const useLogs = (filters = {}) => {
 
   const createLog = async (logData) => {
     try {
-      const response = await api.post('/logs/', logData)
+      const response = await api.post('/api/v1/logs/', logData)
       setLogs([response.data, ...logs])
       return { success: true, data: response.data }
     } catch (err) {
@@ -51,7 +51,7 @@ export const useLogs = (filters = {}) => {
   const updateLog = async (id, logData) => {
     try {
       // The API updates or creates the log automatically
-      const response = await api.post('/logs/', {
+      const response = await api.post('/api/v1/logs/', {
         task_id: logData.task_id,
         date: logData.date,
         status: logData.status
@@ -69,7 +69,7 @@ export const useLogs = (filters = {}) => {
 
   const deleteLog = async (id) => {
     try {
-      await api.delete(`/logs/${id}`)
+      await api.delete(`/api/v1/logs/${id}`)
       setLogs(logs.filter(log => log.id !== id))
       return { success: true }
     } catch (err) {

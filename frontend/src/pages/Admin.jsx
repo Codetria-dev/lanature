@@ -22,9 +22,9 @@ export default function Admin() {
     try {
       setLoading(true)
       const [usersRes, statsRes, settingsRes] = await Promise.all([
-        api.get('/admin/users'),
-        api.get('/admin/stats'),
-        api.get('/admin/settings')
+        api.get('/api/v1/admin/users'),
+        api.get('/api/v1/admin/stats'),
+        api.get('/api/v1/admin/settings')
       ])
       setUsers(usersRes.data)
       setStats(statsRes.data)
@@ -43,10 +43,10 @@ export default function Admin() {
   const handleToggleUserStatus = async (userId, isActive) => {
     try {
       if (isActive) {
-        await api.patch(`/admin/users/${userId}/deactivate`)
+        await api.patch(`/api/v1/admin/users/${userId}/deactivate`)
         setAlert({ type: 'success', message: 'User deactivated successfully' })
       } else {
-        await api.patch(`/admin/users/${userId}/activate`)
+        await api.patch(`/api/v1/admin/users/${userId}/activate`)
         setAlert({ type: 'success', message: 'User activated successfully' })
       }
       fetchData()
@@ -61,7 +61,7 @@ export default function Admin() {
     }
 
     try {
-      await api.delete(`/admin/users/${userId}`)
+      await api.delete(`/api/v1/admin/users/${userId}`)
       setAlert({ type: 'success', message: 'User deleted successfully' })
       fetchData()
     } catch (error) {
@@ -71,7 +71,7 @@ export default function Admin() {
 
   const handleUpdateSetting = async (key, value) => {
     try {
-      await api.patch(`/admin/settings/${key}`, { value })
+      await api.patch(`/api/v1/admin/settings/${key}`, { value })
       setAlert({ type: 'success', message: 'Setting updated successfully' })
       fetchData()
     } catch (error) {
