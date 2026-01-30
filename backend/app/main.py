@@ -39,3 +39,7 @@ app.include_router(admin.router, prefix="/api/v1/admin", tags=["admin"])
 @app.get("/")
 def root():
     return {"message": "LaNature API"}
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
