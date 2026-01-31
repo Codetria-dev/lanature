@@ -7,7 +7,13 @@ import os
 import uvicorn
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8000))
+    # Railway provides PORT environment variable
+    # Default to 8000 if not set (for local development)
+    port_env = os.environ.get("PORT", "8000")
+    port = int(port_env)
+    
+    print(f"Starting server on port {port} (PORT env: {port_env})")
+    
     uvicorn.run(
         "app.main:app",
         host="0.0.0.0",

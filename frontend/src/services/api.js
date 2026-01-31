@@ -6,7 +6,22 @@ const baseURL = (import.meta.env.VITE_API_URL || '').replace(/\/api\/v1\/?$/, ''
 
 export const api = axios.create({
   baseURL: baseURL,
+  withCredentials: true,
 });
+
+// Interceptor para adicionar token em todas as requisições
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
+    return config
+  },
+  (error) => {
+    return Promise.reject(error)
+  }
+)
 
 // Interceptor para tratar erros de autenticação/autorização
 api.interceptors.response.use(

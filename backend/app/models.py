@@ -13,6 +13,7 @@ Architectural decisions:
 
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Boolean, Date, Time, Float, Text, JSON, Enum as SQLEnum
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql import func
 from datetime import datetime
 import enum
 from app.database import Base
@@ -80,11 +81,12 @@ class User(Base):
     
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, nullable=False)
-    email = Column(String, unique=True, index=True, nullable=False)
+    email = Column(String, unique=True, nullable=False, index=True)
     password_hash = Column(String, nullable=False)  # bcrypt hashed password
     is_active = Column(Boolean, default=True, nullable=False)  # Account activation status
     is_superuser = Column(Boolean, default=False, nullable=False)  # ADMIN role flag
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), onupdate=func.now())
     
     # Relationship: One user can have many pets
     # Cascade delete: Deleting user deletes all their pets and related data
