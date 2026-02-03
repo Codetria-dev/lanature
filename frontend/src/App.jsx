@@ -10,6 +10,9 @@ import Routines from './pages/Routines'
 import History from './pages/History'
 import Admin from './pages/Admin'
 import Contact from './pages/Contact'
+import About from './pages/About'
+import NotFound from './pages/NotFound'
+import ServerError from './pages/ServerError'
 import Layout from './components/Layout'
 import AdminLayout from './components/AdminLayout'
 import ProtectedRoute from './components/ProtectedRoute'
@@ -23,7 +26,6 @@ function PublicRoute({ children }) {
   }
   
   if (user) {
-    // Se for superuser, redireciona para admin, senão para dashboard
     return <Navigate to={user.is_superuser ? "/admin" : "/dashboard"} replace />
   }
   
@@ -41,7 +43,6 @@ function App() {
           <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
           <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
           
-          {/* Rotas protegidas - requerem usuário logado */}
           <Route 
             path="/dashboard" 
             element={
@@ -75,7 +76,6 @@ function App() {
             } 
           />
           
-          {/* Rota admin - requer role admin */}
           <Route 
             path="/admin" 
             element={
@@ -86,6 +86,10 @@ function App() {
           />
           
           <Route path="/contact" element={<Layout><Contact /></Layout>} />
+          <Route path="/about" element={<Layout><About /></Layout>} />
+          
+          <Route path="/500" element={<ServerError />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </AuthProvider>
