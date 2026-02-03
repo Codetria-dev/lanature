@@ -8,7 +8,25 @@
   "password": "Senha",
   "name": "Nome",
   "loading": "Carregando...",
-  "dashboard": "Hello",
+  "dashboard": {
+    "title": "Bem-vindo de volta",
+    "subtitle": "Aqui está o que está acontecendo com seus pets hoje",
+    "primaryActionContext": "Aqui está o que precisa da sua atenção hoje",
+    "summary": {
+      "tasksToday": {
+        "zero": "Nenhuma tarefa hoje",
+        "one": "tarefa hoje",
+        "other": "tarefas hoje"
+      },
+      "petsRegistered": {
+        "zero": "Nenhum pet cadastrado",
+        "one": "pet cadastrado",
+        "other": "pets cadastrados"
+      },
+      "lastActivityToday": "Última atividade: hoje",
+      "lastActivityDate": "Última atividade: {{date}}"
+    }
+  },
   "pets": "Pets",
   "routines": "Rotinas",
   "history": "Histórico",
@@ -53,23 +71,280 @@
     "create": "Criar Pet",
     "update": "Atualizar Pet",
     "species": "Espécie",
-    "birthDate": "Data de Nascimento"
+    "birthDate": "Data de Nascimento",
+    "title": "Pets",
+    "addFirst": "Adicionar primeiro pet",
+    "newPet": "Novo Pet",
+    "petUpdated": "Pet atualizado com sucesso!",
+    "petCreated": "Pet criado com sucesso!",
+    "petDeleted": "Pet excluído com sucesso!",
+    "startAdding": "Comece adicionando seu primeiro pet",
+    "bornOn": "Nascido em:",
+    "notFound": "Pet não encontrado",
+    "onboarding": {
+      "title": "Comece adicionando seu primeiro pet",
+      "description": "Adicione um pet para começar a criar rotinas de cuidado",
+      "action": "Adicionar Pet"
+    },
+    "more": "mais"
   },
   "routines": {
     "nextCare": "Próximos Cuidados do Dia",
     "noneActive": "Nenhuma rotina ativa cadastrada.",
     "noneToday": "Nenhuma rotina agendada para hoje.",
     "viewAll": "Ver todas as rotinas →",
-    "create": "Criar Rotina",
+    "create": "Adicionar Rotina",
     "type": "Tipo",
     "frequency": "Frequência",
     "time": "Horário",
-    "active": "Ativo"
+    "active": "Ativo",
+    "title": "Rotinas",
+    "addTask": "Adicionar Tarefa",
+    "addFirstTask": "Adicionar primeira tarefa",
+    "editTask": "Editar Tarefa",
+    "addTaskToRoutine": "Adicionar Tarefa à Rotina",
+    "noPetsYet": "Nenhum pet cadastrado ainda",
+    "noPetsDescription": "Cadastre um pet primeiro para começar a adicionar tarefas à rotina dele",
+    "noTasksForPet": "Nenhuma tarefa cadastrada para",
+    "activeStatus": "Ativa",
+    "inactiveStatus": "Inativa",
+    "activate": "Ativar",
+    "deactivate": "Desativar",
+    "edit": "Editar",
+    "delete": "Excluir",
+    "taskUpdated": "Tarefa atualizada com sucesso!",
+    "taskAdded": "Tarefa adicionada com sucesso!",
+    "taskDeleted": "Tarefa excluída com sucesso!",
+    "taskDeactivated": "Tarefa desativada!",
+    "taskActivated": "Tarefa ativada!",
+    "completedToday": "Concluída hoje",
+    "inactiveCannotComplete": "Tarefa inativa não pode ser marcada como concluída",
+    "taskUnmarked": "Tarefa desmarcada",
+    "taskMarkedCompleted": "Tarefa marcada como concluída!",
+    "onboarding": {
+      "title": "Você ainda não tem rotinas",
+      "description": "Adicione sua primeira rotina de cuidado para começar",
+      "action": "Adicionar Tarefa"
+    }
   },
   "actions": {
     "quickActions": "Ações Rápidas",
     "addPet": "Adicionar Pet",
-    "createRoutine": "Criar Rotina",
-    "viewHistory": "Ver Histórico"
+    "monitorPet": "Ver Rotinas",
+    "monitorPetDesc": "Ver todas as rotinas",
+    "createRoutine": "Nova Rotina",
+    "viewHistory": "Ver Histórico",
+    "viewHistoryDesc": "Veja seu progresso",
+    "addTaskDesc": "Crie uma nova tarefa de cuidado para seus pets"
+  },
+  "navigation": {
+    "home": "Início",
+    "about": "Sobre",
+    "contact": "Contato"
+  },
+  "footer": {
+    "rights": "Todos os direitos reservados."
+  },
+  "history": {
+    "title": "Histórico",
+    "filterByPet": "Filtrar por Pet",
+    "filterByStatus": "Filtrar por Status",
+    "allPets": "Todos os pets",
+    "all": "Todos",
+    "noRecords": "Nenhum registro no histórico ainda",
+    "noRecordsDescription": "Os registros de execução das rotinas aparecerão aqui",
+    "pet": "Pet",
+    "date": "Data",
+    "markAsDone": "Marcar como Feito",
+    "markAsSkipped": "Marcar como Pulado",
+    "delete": "Excluir",
+    "statusUpdated": "Status atualizado com sucesso!",
+    "recordDeleted": "Registro excluído com sucesso!",
+    "taskNotFound": "Tarefa não encontrada",
+    "record": {
+      "zero": "Nenhum registro",
+      "one": "registro",
+      "other": "registros"
+    }
+  },
+  "contact": {
+    "title": "Entre em Contato",
+    "subtitle": "Tem alguma dúvida ou sugestão? Entre em contato conosco!",
+    "subject": "Assunto",
+    "message": "Mensagem",
+    "sendMessage": "Enviar Mensagem",
+    "sending": "Enviando...",
+    "messageSent": "Mensagem enviada com sucesso! Entraremos em contato em breve.",
+    "subjectPlaceholder": "Assunto da mensagem",
+    "messagePlaceholder": "Sua mensagem aqui...",
+    "emailPlaceholder": "seu@email.com"
+  },
+  "common": {
+    "edit": "Editar",
+    "delete": "Excluir",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "submit": "Enviar",
+    "required": "obrigatório",
+    "close": "Fechar"
+  },
+  "forms": {
+    "petName": "Nome do pet",
+    "petNameRequired": "Nome é obrigatório",
+    "speciesRequired": "Espécie é obrigatória",
+    "timeRequired": "Horário é obrigatório",
+    "typeRequired": "Tipo é obrigatório",
+    "petRequired": "Selecione um pet",
+    "fullName": "Seu nome completo",
+    "speciesPlaceholder": "Ex: Cachorro, Gato, etc.",
+    "typePlaceholder": "Ex: ração, remédio, água",
+    "birthDateOptional": "Data de Nascimento (opcional)",
+    "activeRoutine": "Rotina ativa",
+    "save": "Salvar",
+    "update": "Atualizar",
+    "cancel": "Cancelar"
+  },
+  "messages": {
+    "loading": "Carregando...",
+    "errorGeneric": "Ocorreu um erro. Tente novamente.",
+    "confirmDelete": "Tem certeza que deseja excluir?",
+    "successCreate": "Criado com sucesso!",
+    "successUpdate": "Atualizado com sucesso!",
+    "successDelete": "Excluído com sucesso!"
+  },
+  "loadingStates": {
+    "generic": "Carregando...",
+    "savingTask": "Salvando tarefa...",
+    "creatingTask": "Criando tarefa...",
+    "updatingTask": "Atualizando tarefa...",
+    "deletingTask": "Excluindo tarefa...",
+    "addingPet": "Adicionando pet...",
+    "updatingPet": "Atualizando pet...",
+    "deletingPet": "Excluindo pet...",
+    "loadingPets": "Carregando pets...",
+    "loadingRoutines": "Carregando rotinas...",
+    "loadingHistory": "Carregando histórico...",
+    "sendingMessage": "Enviando mensagem...",
+    "creatingAccount": "Criando conta...",
+    "loggingIn": "Entrando...",
+    "markingDone": "Marcando como concluído...",
+    "updatingStatus": "Atualizando status...",
+    "deletingRecord": "Excluindo registro...",
+    "loadingUsers": "Carregando usuários...",
+    "deletingUser": "Excluindo usuário..."
+  },
+  "status": {
+    "done": "Feito",
+    "skipped": "Pulado",
+    "active": "Ativo",
+    "inactive": "Inativo"
+  },
+  "frequency": {
+    "daily": "Diário",
+    "weekly": "Semanal",
+    "custom": "Personalizado"
+  },
+  "admin": {
+    "title": "Painel Administrativo",
+    "welcome": "Bem-vindo ao LaNature",
+    "tabs": {
+      "users": "Usuários",
+      "stats": "Estatísticas",
+      "settings": "Configurações"
+    },
+    "users": {
+      "email": "Email",
+      "createdAt": "Criado Em",
+      "pets": "Pets",
+      "activeRoutines": "Rotinas Ativas",
+      "status": "Status",
+      "actions": "Ações",
+      "activate": "Ativar",
+      "deactivate": "Desativar",
+      "delete": "Excluir",
+      "confirmDelete": "Tem certeza que deseja excluir este usuário? Esta ação não pode ser desfeita.",
+      "userActivated": "Usuário ativado com sucesso",
+      "userDeactivated": "Usuário desativado com sucesso",
+      "userDeleted": "Usuário excluído com sucesso",
+      "errorUpdate": "Erro ao atualizar status do usuário",
+      "errorDelete": "Erro ao excluir usuário"
+    },
+    "stats": {
+      "totalUsers": "Total de Usuários",
+      "totalPets": "Total de Pets",
+      "activeRoutines": "Rotinas Ativas",
+      "completedToday": "Concluídas Hoje",
+      "activeUsers7Days": "Usuários Ativos (7 dias)"
+    },
+    "settings": {
+      "enabled": "Habilitado",
+      "disabled": "Desabilitado",
+      "save": "Salvar",
+      "updated": "Configuração atualizada com sucesso",
+      "errorUpdate": "Erro ao atualizar configuração"
+    },
+    "accessDenied": "Acesso negado. Apenas superusuários podem acessar esta página.",
+    "errorLoading": "Erro ao carregar dados administrativos"
+  },
+  "about": {
+    "title": "Sobre o LaNature",
+    "subtitle": "Gestão simples e confiável de cuidados com pets",
+    "problem": {
+      "title": "O problema que resolvemos",
+      "description": "Tutores de pets têm dificuldade em manter rotinas de cuidado consistentes. Esquecer doses de medicação, horários de alimentação ou perder o histórico de cuidados pode ter consequências sérias.",
+      "point1": "Esquecer tarefas críticas como medicação ou horários de alimentação",
+      "point2": "Falta de organização ao gerenciar múltiplos pets com necessidades diferentes",
+      "point3": "Sem registro histórico para rastrear quais cuidados foram fornecidos e quando",
+      "point4": "Soluções existentes são muito complexas, caras ou faltam recursos essenciais"
+    },
+    "audience": {
+      "title": "Para quem é",
+      "description": "LaNature é projetado para tutores de pets que querem clareza, organização e tranquilidade.",
+      "ideal": {
+        "title": "Usuários ideais",
+        "description": "Tutores que precisam de um sistema simples e confiável para rastrear rotinas diárias de cuidado sem complexidade."
+      },
+      "multiPet": {
+        "title": "Lares com múltiplos pets",
+        "description": "Tutores que gerenciam múltiplos pets com diferentes horários e necessidades de cuidado."
+      }
+    },
+    "scope": {
+      "title": "O que o LaNature não faz",
+      "description": "Focamos em gestão de rotinas de cuidado. Aqui está o que está intencionalmente fora do escopo:",
+      "not1": "Registros médicos veterinários ou diagnósticos (rastreamos cuidados, não condições médicas)",
+      "not2": "Recursos sociais ou comunidade (focamos em cuidados individuais com pets)",
+      "not3": "E-commerce ou vendas de produtos (somos uma ferramenta de gestão, não um marketplace)",
+      "not4": "Análises avançadas ou previsões de IA (mantemos simples e confiável)"
+    },
+    "roadmap": {
+      "title": "Roadmap",
+      "completed": {
+        "title": "Concluído",
+        "description": "Recursos principais: gestão de pets, agendamento de rotinas, rastreamento de conclusão de tarefas e histórico de cuidados."
+      },
+      "next": {
+        "title": "Próximo",
+        "description": "App mobile, lembretes/notificações e funcionalidade de exportação para registros de cuidados."
+      },
+      "future": {
+        "title": "Considerações futuras",
+        "description": "Recursos potenciais: rastreamento de estoque de medicação, agendamento de consultas veterinárias e modelos de cuidado."
+      }
+    },
+    "cta": "Comece grátis"
+  },
+  "error404": {
+    "title": "Página não encontrada",
+    "description": "A página que você está procurando não existe ou foi movida.",
+    "goHome": "Ir para o dashboard",
+    "goLanding": "Voltar para o início"
+  },
+  "error500": {
+    "title": "Algo deu errado",
+    "description": "Encontramos um erro inesperado. Nossa equipe foi notificada.",
+    "help": "Isso geralmente é temporário. Tente atualizar a página ou volte em alguns minutos.",
+    "retry": "Tentar novamente",
+    "goHome": "Ir para o dashboard"
   }
 }

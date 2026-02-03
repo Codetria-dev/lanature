@@ -1,0 +1,87 @@
+{
+  "emptyStates": {
+    "noPets": {
+      "title": "Vamos começar",
+      "description": "Adicione seu primeiro pet para começar a criar rotinas de cuidado e acompanhar a saúde dele.",
+      "action": "Adicionar Pet"
+    },
+    "noRoutines": {
+      "title": "Nada aqui ainda",
+      "description": "Adicione sua primeira tarefa de cuidado — suas tarefas concluídas aparecerão aqui.",
+      "action": "Adicionar Tarefa"
+    },
+    "noHistory": {
+      "title": "Nada aqui ainda",
+      "description": "Suas tarefas concluídas aparecerão aqui — comece a marcar tarefas para ver seu progresso.",
+      "action": null
+    },
+    "noTasksForPet": {
+      "title": "Nenhuma tarefa ainda para {{petName}}",
+      "description": "Adicione sua primeira tarefa de cuidado para este pet.",
+      "action": "Adicionar primeira tarefa"
+    },
+    "noTasksToday": {
+      "title": "Tudo feito!",
+      "description": "Nenhuma tarefa agendada para hoje. Ótimo trabalho cuidando dos seus pets!",
+      "action": null
+    }
+  },
+  "success": {
+    "petCreated": "Pet adicionado com sucesso!",
+    "petUpdated": "Pet atualizado com sucesso!",
+    "petDeleted": "Pet removido com sucesso!",
+    "taskCreated": "Tarefa criada com sucesso!",
+    "taskUpdated": "Tarefa atualizada com sucesso!",
+    "taskDeleted": "Tarefa excluída com sucesso!",
+    "taskCompleted": "Ótimo trabalho! Tarefa marcada como concluída.",
+    "taskUnmarked": "Tarefa desmarcada",
+    "taskActivated": "Tarefa reativada",
+    "taskDeactivated": "Tarefa pausada",
+    "logUpdated": "Status atualizado com sucesso!",
+    "logDeleted": "Registro removido com sucesso!",
+    "messageSent": "Obrigado por entrar em contato! Entraremos em contato em breve."
+  },
+  "errors": {
+    "generic": "Algo deu errado. Tente novamente.",
+    "network": "Erro de conexão. Verifique sua internet e tente novamente.",
+    "notFound": "{{item}} não encontrado",
+    "unauthorized": "Você não tem permissão para fazer isso.",
+    "validation": "Verifique o formulário e tente novamente.",
+    "deleteConfirm": "Tem certeza? Esta ação não pode ser desfeita.",
+    "inactiveTask": "Esta tarefa está pausada — ative-a primeiro para marcar como concluída",
+    "noPetsForTask": "Adicione um pet primeiro para adicionar tarefas de cuidado"
+  },
+  "titles": {
+    "dashboard": "Bem-vindo de volta",
+    "pets": "Seus Pets",
+    "routines": "Rotinas de Cuidado",
+    "history": "Histórico de Tarefas",
+    "contact": "Entre em Contato",
+    "addPet": "Adicionar Novo Pet",
+    "editPet": "Editar Pet",
+    "addTask": "Adicionar Tarefa de Cuidado",
+    "editTask": "Editar Tarefa"
+  },
+  "descriptions": {
+    "quickActions": "Ações Rápidas",
+    "todayTasks": "Tarefas de Cuidado de Hoje",
+    "registeredPets": "Seus Pets",
+    "addTaskDesc": "Adicione uma nova tarefa de cuidado para seus pets",
+    "viewRoutinesDesc": "Ver todas as rotinas",
+    "viewHistoryDesc": "Veja seu progresso"
+  },
+  "placeholders": {
+    "search": "Buscar...",
+    "filter": "Filtrar...",
+    "selectPet": "Selecione um pet",
+    "selectTime": "Selecione o horário"
+  },
+  "tooltips": {
+    "markDone": "Marcar como concluído",
+    "markSkipped": "Marcar como pulado",
+    "edit": "Editar",
+    "delete": "Excluir",
+    "activate": "Ativar tarefa",
+    "deactivate": "Pausar tarefa"
+  }
+}

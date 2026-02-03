@@ -1,0 +1,87 @@
+{
+  "emptyStates": {
+    "noPets": {
+      "title": "Let's get started",
+      "description": "Add your first pet to begin creating care routines and tracking their health.",
+      "action": "Add Pet"
+    },
+    "noRoutines": {
+      "title": "Nothing here yet",
+      "description": "Add your first care task — your completed tasks will appear here.",
+      "action": "Add Task"
+    },
+    "noHistory": {
+      "title": "Nothing here yet",
+      "description": "Your completed tasks will appear here — start checking off tasks to see your progress.",
+      "action": null
+    },
+    "noTasksForPet": {
+      "title": "No tasks yet for {{petName}}",
+      "description": "Add your first care task for this pet.",
+      "action": "Add your first task"
+    },
+    "noTasksToday": {
+      "title": "All done!",
+      "description": "No tasks scheduled for today. Great job keeping up with your pets' care!",
+      "action": null
+    }
+  },
+  "success": {
+    "petCreated": "Pet added successfully!",
+    "petUpdated": "Pet updated successfully!",
+    "petDeleted": "Pet removed successfully!",
+    "taskCreated": "Task created successfully!",
+    "taskUpdated": "Task updated successfully!",
+    "taskDeleted": "Task deleted successfully!",
+    "taskCompleted": "Great job! Task marked as done.",
+    "taskUnmarked": "Task unchecked",
+    "taskActivated": "Task resumed",
+    "taskDeactivated": "Task paused",
+    "logUpdated": "Status updated successfully!",
+    "logDeleted": "Record removed successfully!",
+    "messageSent": "Thanks for reaching out! We'll get back to you soon."
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again.",
+    "network": "Connection error. Please check your internet and try again.",
+    "notFound": "{{item}} not found",
+    "unauthorized": "You don't have permission to do this.",
+    "validation": "Please check the form and try again.",
+    "deleteConfirm": "Are you sure? This action cannot be undone.",
+    "inactiveTask": "This task is paused — activate it first to mark as done",
+    "noPetsForTask": "Add a pet first to add care tasks"
+  },
+  "titles": {
+    "dashboard": "Welcome back",
+    "pets": "Your Pets",
+    "routines": "Care Routines",
+    "history": "Task History",
+    "contact": "Get in Touch",
+    "addPet": "Add New Pet",
+    "editPet": "Edit Pet",
+    "addTask": "Add Care Task",
+    "editTask": "Edit Task"
+  },
+  "descriptions": {
+    "quickActions": "Quick Actions",
+    "todayTasks": "Today's Care Tasks",
+    "registeredPets": "Your Pets",
+    "addTaskDesc": "Add a new care task for your pets",
+    "viewRoutinesDesc": "View all routines",
+    "viewHistoryDesc": "See your progress"
+  },
+  "placeholders": {
+    "search": "Search...",
+    "filter": "Filter...",
+    "selectPet": "Select a pet",
+    "selectTime": "Select time"
+  },
+  "tooltips": {
+    "markDone": "Mark as completed",
+    "markSkipped": "Mark as skipped",
+    "edit": "Edit",
+    "delete": "Delete",
+    "activate": "Activate task",
+    "deactivate": "Pause task"
+  }
+}

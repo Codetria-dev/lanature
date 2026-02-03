@@ -1,75 +1,347 @@
 {
-  "welcome": "Take better care of your pets",
+  "welcome": "Care for your pets with confidence",
   "appName": "LaNature",
-  "login": "Login",
+  "login": "Sign in",
   "register": "Create account",
-  "enter": "Enter",
-  "email": "Email",
+  "enter": "Continue",
+  "email": "Email address",
   "password": "Password",
-  "name": "Name",
-  "loading": "Loading...",
-  "dashboard": "Hello",
-  "pets": "Pets",
-  "routines": "Routines",
-  "history": "History",
-  "logout": "Logout",
+  "name": "Full name",
+  "loading": "Loading…",
+  "dashboard": {
+    "title": "Welcome back",
+    "subtitle": "Here's what's happening with your pets today",
+    "primaryActionContext": "Here's what needs your attention today",
+    "summary": {
+      "tasksToday": {
+        "zero": "No tasks today",
+        "one": "task today",
+        "other": "tasks today"
+      },
+      "petsRegistered": {
+        "zero": "No pets registered",
+        "one": "pet registered",
+        "other": "pets registered"
+      },
+      "lastActivityToday": "Last activity: today",
+      "lastActivityDate": "Last activity: {{date}}"
+    }
+  },
+  "logout": "Log out",
   "landing": {
-    "title": "Take care of your pets with",
-    "titleHighlight": "organization",
-    "subtitle": "Manage feeding, medication and care routines for your pets in a simple and efficient way.",
-    "cta": "Get started for free",
+    "title": "Everything you need to care for your pets,",
+    "titleHighlight": "organized in one place",
+    "subtitle": "Plan routines, track care history, and never miss an important task.",
+    "cta": "Get started — it's free",
     "features": {
       "what": {
-        "title": "What it is",
-        "description": "Complete platform to manage all your pets' care in one place."
+        "title": "What it does",
+        "description": "Centralize your pets' daily care in a simple and reliable system."
       },
       "who": {
         "title": "Who it's for",
-        "description": "For pet owners who want to ensure their pets receive all care at the right time."
+        "description": "For pet owners who want clarity, organization, and peace of mind."
       },
       "benefits": {
-        "title": "Benefits",
-        "description": "Organize routines, track history and never forget to care for your pets again."
+        "title": "Why it matters",
+        "description": "Stay consistent with feeding, medication, and care — without stress."
       }
     }
   },
   "auth": {
     "loginTitle": "Sign in to your account",
-    "loginSubtitle": "Or",
+    "loginSubtitle": "or",
     "createAccount": "create a new account",
     "registerTitle": "Create your account",
-    "registerSubtitle": "Or",
-    "alreadyHaveAccount": "already have an account",
-    "loginError": "Error logging in",
-    "registerError": "Error creating account"
+    "registerSubtitle": "or",
+    "alreadyHaveAccount": "sign in instead",
+    "loginError": "We couldn't sign you in. Please check your email and password.",
+    "registerError": "We couldn't create your account. Please try again."
   },
   "pets": {
-    "registered": "Registered Pets",
-    "none": "No pets registered yet.",
+    "registered": "Your pets",
+    "none": "No pets yet — add your first pet to get started.",
     "manage": "Manage pets →",
-    "add": "Add Pet",
-    "edit": "Edit Pet",
-    "delete": "Delete Pet",
-    "create": "Create Pet",
-    "update": "Update Pet",
+    "add": "Add pet",
+    "edit": "Edit pet",
+    "delete": "Delete pet",
+    "create": "Create pet",
+    "update": "Update pet",
     "species": "Species",
-    "birthDate": "Birth Date"
+    "birthDate": "Birth date",
+    "title": "Pets",
+    "addFirst": "Add your first pet",
+    "newPet": "New pet",
+    "petUpdated": "Pet updated successfully.",
+    "petCreated": "Pet added successfully.",
+    "petDeleted": "Pet removed successfully.",
+    "startAdding": "Start by adding a pet",
+    "bornOn": "Born on",
+    "notFound": "Pet not found",
+    "onboarding": {
+      "title": "Let's get started",
+      "description": "Add your first pet to begin creating care routines and tracking health.",
+      "action": "Add pet"
+    },
+    "more": "more"
   },
   "routines": {
-    "nextCare": "Next Care of the Day",
-    "noneActive": "No active routines registered.",
-    "noneToday": "No routines scheduled for today.",
+    "nextCare": "Today's care tasks",
+    "noneActive": "No routines yet — create your first task to get started.",
+    "noneToday": "All set! No tasks scheduled for today.",
     "viewAll": "View all routines →",
-    "create": "Create Routine",
-    "type": "Type",
+    "create": "Create routine",
+    "type": "Task type",
     "frequency": "Frequency",
     "time": "Time",
-    "active": "Active"
+    "active": "Active",
+    "title": "Routines",
+    "addTask": "New task",
+    "addFirstTask": "Create your first task",
+    "editTask": "Edit task",
+    "addTaskToRoutine": "Add task",
+    "noPetsYet": "No pets yet",
+    "noPetsDescription": "Add a pet before creating care tasks.",
+    "noTasksForPet": "No tasks yet for",
+    "activeStatus": "Active",
+    "inactiveStatus": "Paused",
+    "activate": "Activate",
+    "deactivate": "Pause",
+    "edit": "Edit",
+    "delete": "Delete",
+    "taskUpdated": "Task updated successfully.",
+    "taskAdded": "Task created successfully.",
+    "taskDeleted": "Task deleted successfully.",
+    "taskDeactivated": "Task paused.",
+    "taskActivated": "Task resumed.",
+    "completedToday": "Completed today",
+    "inactiveCannotComplete": "This task is paused. Activate it to mark as done.",
+    "taskUnmarked": "Task unchecked.",
+    "taskMarkedCompleted": "Nice work! Task marked as done.",
+    "onboarding": {
+      "title": "Nothing here yet",
+      "description": "Create your first care task and start building consistency.",
+      "action": "New task"
+    }
   },
   "actions": {
-    "quickActions": "Quick Actions",
-    "addPet": "Add Pet",
-    "createRoutine": "Create Routine",
-    "viewHistory": "View History"
+    "quickActions": "Quick actions",
+    "addPet": "Add pet",
+    "monitorPet": "View routines",
+    "monitorPetDesc": "See all scheduled care",
+    "createRoutine": "New routine",
+    "viewHistory": "View history",
+    "viewHistoryDesc": "Track completed tasks",
+    "addTaskDesc": "Create a new care task"
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  },
+  "history": {
+    "title": "History",
+    "filterByPet": "Filter by pet",
+    "filterByStatus": "Filter by status",
+    "allPets": "All pets",
+    "all": "All",
+    "noRecords": "Nothing here yet",
+    "noRecordsDescription": "Completed tasks will appear here as you check them off.",
+    "pet": "Pet",
+    "date": "Date",
+    "markAsDone": "Mark as done",
+    "markAsSkipped": "Skip",
+    "delete": "Delete",
+    "statusUpdated": "Status updated successfully.",
+    "recordDeleted": "Record removed successfully.",
+    "taskNotFound": "Task not found",
+    "record": {
+      "zero": "No records",
+      "one": "record",
+      "other": "records"
+    }
+  },
+  "contact": {
+    "title": "Contact us",
+    "subtitle": "Have questions or feedback? We'd love to hear from you.",
+    "subject": "Subject",
+    "message": "Message",
+    "sendMessage": "Send message",
+    "sending": "Sending…",
+    "messageSent": "Thanks for reaching out. We'll get back to you soon.",
+    "subjectPlaceholder": "What's this about?",
+    "messagePlaceholder": "Write your message here…",
+    "emailPlaceholder": "you@example.com"
+  },
+  "common": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "save": "Save",
+    "submit": "Submit",
+    "required": "required",
+    "close": "Close"
+  },
+  "forms": {
+    "petName": "Pet name",
+    "petNameRequired": "Name is required",
+    "speciesRequired": "Species is required",
+    "timeRequired": "Time is required",
+    "typeRequired": "Type is required",
+    "petRequired": "Select a pet",
+    "fullName": "Your full name",
+    "speciesPlaceholder": "Ex: Dog, Cat, etc.",
+    "typePlaceholder": "Ex: food, medicine, water",
+    "birthDateOptional": "Birth date (optional)",
+    "activeRoutine": "Active routine",
+    "save": "Save",
+    "update": "Update",
+    "cancel": "Cancel"
+  },
+  "messages": {
+    "loading": "Loading…",
+    "errorGeneric": "Something went wrong. Please try again.",
+    "confirmDelete": "Are you sure? This action can't be undone.",
+    "successCreate": "Created successfully.",
+    "successUpdate": "Updated successfully.",
+    "successDelete": "Deleted successfully."
+  },
+  "loadingStates": {
+    "generic": "Loading…",
+    "savingTask": "Saving task…",
+    "creatingTask": "Creating task…",
+    "updatingTask": "Updating task…",
+    "deletingTask": "Deleting task…",
+    "addingPet": "Adding pet…",
+    "updatingPet": "Updating pet…",
+    "deletingPet": "Deleting pet…",
+    "loadingPets": "Loading pets…",
+    "loadingRoutines": "Loading routines…",
+    "loadingHistory": "Loading history…",
+    "sendingMessage": "Sending message…",
+    "creatingAccount": "Creating account…",
+    "loggingIn": "Logging in…",
+    "markingDone": "Marking as done…",
+    "updatingStatus": "Updating status…",
+    "deletingRecord": "Deleting record…",
+    "loadingUsers": "Loading users…",
+    "deletingUser": "Deleting user…"
+  },
+  "status": {
+    "done": "Done",
+    "skipped": "Skipped",
+    "active": "Active",
+    "inactive": "Paused"
+  },
+  "frequency": {
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "custom": "Custom"
+  },
+  "admin": {
+    "title": "Admin panel",
+    "welcome": "Welcome to LaNature",
+    "tabs": {
+      "users": "Users",
+      "stats": "Statistics",
+      "settings": "Settings"
+    },
+    "users": {
+      "email": "Email",
+      "createdAt": "Created on",
+      "pets": "Pets",
+      "activeRoutines": "Active routines",
+      "status": "Status",
+      "actions": "Actions",
+      "activate": "Activate",
+      "deactivate": "Deactivate",
+      "delete": "Delete",
+      "confirmDelete": "Are you sure you want to delete this user? This can't be undone.",
+      "userActivated": "User activated successfully.",
+      "userDeactivated": "User deactivated successfully.",
+      "userDeleted": "User deleted successfully.",
+      "errorUpdate": "Couldn't update user status.",
+      "errorDelete": "Couldn't delete user."
+    },
+    "stats": {
+      "totalUsers": "Total users",
+      "totalPets": "Total pets",
+      "activeRoutines": "Active routines",
+      "completedToday": "Completed today",
+      "activeUsers7Days": "Active users (last 7 days)"
+    },
+    "settings": {
+      "enabled": "Enabled",
+      "disabled": "Disabled",
+      "save": "Save changes",
+      "updated": "Settings updated successfully.",
+      "errorUpdate": "Couldn't update settings."
+    },
+    "accessDenied": "Access denied. Admin privileges required.",
+    "errorLoading": "Couldn't load admin data."
+  },
+  "about": {
+    "title": "About LaNature",
+    "subtitle": "Simple, reliable pet care management",
+    "problem": {
+      "title": "The problem we solve",
+      "description": "Pet owners struggle to maintain consistent care routines. Missing medication doses, forgetting feeding times, or losing track of care history can have serious consequences.",
+      "point1": "Forgetting critical care tasks like medication or feeding schedules",
+      "point2": "Lack of organization when managing multiple pets with different needs",
+      "point3": "No historical record to track what care was provided and when",
+      "point4": "Existing solutions are too complex, expensive, or lack essential features"
+    },
+    "audience": {
+      "title": "Who it's for",
+      "description": "LaNature is designed for pet owners who want clarity, organization, and peace of mind.",
+      "ideal": {
+        "title": "Ideal users",
+        "description": "Pet owners who need a simple, reliable system to track daily care routines without complexity."
+      },
+      "multiPet": {
+        "title": "Multi-pet households",
+        "description": "Owners managing multiple pets with different schedules and care requirements."
+      }
+    },
+    "scope": {
+      "title": "What LaNature doesn't do",
+      "description": "We focus on care routine management. Here's what's intentionally out of scope:",
+      "not1": "Veterinary medical records or diagnosis (we track care, not medical conditions)",
+      "not2": "Social features or community (we're focused on individual pet care)",
+      "not3": "E-commerce or product sales (we're a management tool, not a marketplace)",
+      "not4": "Advanced analytics or AI predictions (we keep it simple and reliable)"
+    },
+    "roadmap": {
+      "title": "Roadmap",
+      "completed": {
+        "title": "Completed",
+        "description": "Core features: pet management, routine scheduling, task completion tracking, and care history."
+      },
+      "next": {
+        "title": "Next up",
+        "description": "Mobile app, reminders/notifications, and export functionality for care records."
+      },
+      "future": {
+        "title": "Future considerations",
+        "description": "Potential features: medication inventory tracking, vet appointment scheduling, and care templates."
+      }
+    },
+    "cta": "Get started for free"
+  },
+  "error404": {
+    "title": "Page not found",
+    "description": "The page you're looking for doesn't exist or has been moved.",
+    "goHome": "Go to dashboard",
+    "goLanding": "Back to home"
+  },
+  "error500": {
+    "title": "Something went wrong",
+    "description": "We encountered an unexpected error. Our team has been notified.",
+    "help": "This is usually temporary. Try refreshing the page or come back in a few minutes.",
+    "retry": "Try again",
+    "goHome": "Go to dashboard"
   }
 }

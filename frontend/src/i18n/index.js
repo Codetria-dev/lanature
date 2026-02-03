@@ -1,9 +1,18 @@
 import en from './en.json'
 import pt from './pt.json'
+import enUx from './en/ux.json'
+import ptUx from './pt/ux.json'
 
+// Merge UX copy into main translations
 const translations = {
-  en,
-  pt
+  en: { ...en, ux: enUx },
+  pt: { ...pt, ux: ptUx }
+}
+
+// Locale mapping
+const locales = {
+  en: 'en-US',
+  pt: 'pt-BR'
 }
 
 let currentLanguage = 'en' // Default to English
@@ -20,6 +29,10 @@ export const getLanguage = () => {
   return saved && translations[saved] ? saved : currentLanguage
 }
 
+export const getLocale = () => {
+  return locales[getLanguage()] || 'en-US'
+}
+
 // Initialize language from localStorage
 if (typeof window !== 'undefined') {
   const saved = localStorage.getItem('language')
@@ -28,11 +41,13 @@ if (typeof window !== 'undefined') {
   }
 }
 
+// Improved translation function with better fallback
 export const t = (key, params = {}) => {
   const lang = getLanguage()
   const keys = key.split('.')
   let value = translations[lang]
   
+  // Try to get value from current language
   for (const k of keys) {
     if (value && typeof value === 'object' && k in value) {
       value = value[k]
@@ -43,10 +58,25 @@ export const t = (key, params = {}) => {
         if (value && typeof value === 'object' && k2 in value) {
           value = value[k2]
         } else {
-          return key // Return key if not found in any language
+          // Elegant fallback: return last key segment instead of full path
+          const lastKey = keys[keys.length - 1]
+          console.warn(`Translation missing: ${key} (lang: ${lang})`)
+          return lastKey.charAt(0).toUpperCase() + lastKey.slice(1).replace(/([A-Z])/g, ' $1').trim()
         }
       }
       break
+    }
+  }
+  
+  // Handle pluralization
+  if (params.count !== undefined) {
+    const count = params.count
+    if (typeof value === 'object' && value.one && value.other) {
+      value = count === 1 ? value.one : value.other
+    } else if (typeof value === 'object' && value.zero && value.one && value.other) {
+      if (count === 0) value = value.zero
+      else if (count === 1) value = value.one
+      else value = value.other
     }
   }
   
@@ -56,11 +86,54 @@ export const t = (key, params = {}) => {
     })
   }
   
-  return typeof value === 'string' ? value : key
+  return typeof value === 'string' ? value : (typeof value === 'object' ? key : key)
+}
+
+// Pluralization helper
+export const plural = (key, count, params = {}) => {
+  return t(key, { ...params, count })
+}
+
+// Date formatting with locale
+export const formatDate = (date, options = {}) => {
+  if (!date) return ''
+  
+  const dateObj = date instanceof Date ? date : new Date(date)
+  if (isNaN(dateObj.getTime())) return ''
+  
+  const locale = getLocale()
+  const defaultOptions = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }
+  
+  return dateObj.toLocaleDateString(locale, { ...defaultOptions, ...options })
+}
+
+// Short date format (e.g., "Jan 15, 2024" or "15 de jan de 2024")
+export const formatDateShort = (date) => {
+  return formatDate(date, {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  })
+}
+
+// Number formatting with locale
+export const formatNumber = (number, options = {}) => {
+  if (number === null || number === undefined) return ''
+  const locale = getLocale()
+  return new Intl.NumberFormat(locale, options).format(number)
 }
 
 export default {
   t,
+  plural,
+  formatDate,
+  formatDateShort,
+  formatNumber,
   setLanguage,
-  getLanguage
+  getLanguage,
+  getLocale
 }
