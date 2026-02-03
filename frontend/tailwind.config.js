@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['"Source Sans Pro"', 'sans-serif'],
+      },
       animation: {
         'fade-in': 'fadeIn 0.2s ease-out',
         'zoom-in-95': 'zoomIn95 0.2s ease-out',
