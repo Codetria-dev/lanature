@@ -459,6 +459,181 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
+## Design Decision Log
+
+This section documents key design decisions and the reasoning behind them. Understanding "why" helps maintain consistency and guides future development.
+
+### **Internationalization (i18n)**
+
+**Decision**: Custom i18n implementation using JSON files and `Intl` APIs instead of libraries like `react-i18next`.
+
+**Why**: 
+- **Simplicity**: No external dependencies, easier to understand and maintain
+- **Performance**: Direct JSON access, no runtime overhead
+- **Control**: Full control over pluralization, date/number formatting
+- **Flexibility**: Easy to add new languages without library constraints
+
+**Trade-offs**:
+- More manual work for pluralization logic
+- No built-in fallback chains (we implemented our own)
+- Less community support compared to established libraries
+
+**Status**: ✅ Implemented with `plural()`, `formatDate()`, `formatNumber()` helpers
+
+---
+
+### **Visual Hierarchy**
+
+**Decision**: Single primary CTA per screen ("New Task" on Dashboard), everything else secondary.
+
+**Why**:
+- **Clarity**: Users know exactly what to do first
+- **Reduced cognitive load**: Less visual noise, clearer focus
+- **Professional**: Matches patterns from mature SaaS products
+- **Conversion**: Clear primary action improves task completion rates
+
+**Implementation**:
+- Primary CTA: Large, colored, prominent (green gradient)
+- Secondary actions: Links or subtle buttons
+- Informational cards: Neutral colors, reduced visual weight
+
+**Status**: ✅ Implemented on Dashboard
+
+---
+
+### **Loading States**
+
+**Decision**: Contextual loading messages ("Saving task..." instead of generic "Loading...").
+
+**Why**:
+- **User confidence**: Users know exactly what's happening
+- **Professional**: Shows attention to detail
+- **Better UX**: Reduces anxiety during async operations
+- **Debugging**: Easier to identify issues in production
+
+**Implementation**:
+- `loadingStates` object in i18n with specific messages
+- `loadingText` prop in Button component
+- Fallback to generic message if not specified
+
+**Status**: ✅ Implemented across all forms and pages
+
+---
+
+### **Semantic Consistency**
+
+**Decision**: Standardized action verbs: Add (creation), Edit (editing), View (navigation), Delete (removal).
+
+**Why**:
+- **Professional**: Consistent language patterns
+- **International**: Follows common SaaS conventions
+- **Clarity**: Users understand actions immediately
+- **Scalability**: Easy to add new features following the pattern
+
+**Pattern**:
+- `Add Task` (not "New Task" or "Create Task")
+- `View History` (not "See History" or "Check History")
+- `Edit Pet` (consistent across all edit actions)
+
+**Status**: ✅ Applied across all UI text
+
+---
+
+### **Error Pages**
+
+**Decision**: Custom, branded error pages (404, 500) instead of default browser errors.
+
+**Why**:
+- **Brand consistency**: Maintains user experience even on errors
+- **User guidance**: Clear next steps instead of dead ends
+- **Professional**: Shows product maturity and attention to detail
+- **Retention**: Helps users recover instead of leaving
+
+**Implementation**:
+- 404: "Page not found" with navigation options
+- 500: "Something went wrong" with retry and home options
+- Both pages use same design system and branding
+
+**Status**: ✅ Implemented
+
+---
+
+### **Form Validation**
+
+**Decision**: Client-side validation with clear error messages, server-side as backup.
+
+**Why**:
+- **Immediate feedback**: Users see errors before submission
+- **Better UX**: Reduces failed requests and frustration
+- **Accessibility**: Clear error messages for screen readers
+- **Security**: Server-side validation still required
+
+**Implementation**:
+- Real-time validation on blur/change
+- Error messages from i18n for consistency
+- Visual indicators (red borders, error text)
+
+**Status**: ✅ Implemented in PetForm and RoutineForm
+
+---
+
+### **Database Choice**
+
+**Decision**: Support both SQLite (development) and PostgreSQL (production).
+
+**Why**:
+- **Developer experience**: SQLite requires no setup for local development
+- **Production ready**: PostgreSQL for scalability and features
+- **Flexibility**: Easy to switch or support both
+- **Cost**: SQLite is free, PostgreSQL can be hosted affordably
+
+**Trade-offs**:
+- Some SQL differences need abstraction
+- Migration scripts must work for both
+- Testing on both databases recommended
+
+**Status**: ✅ Implemented with database-agnostic migrations
+
+---
+
+### **Authentication**
+
+**Decision**: JWT tokens instead of session-based authentication.
+
+**Why**:
+- **Stateless**: Easier to scale horizontally
+- **API-first**: Works seamlessly with REST API
+- **Mobile-ready**: Tokens work well for mobile apps
+- **Security**: Tokens can be revoked, expire automatically
+
+**Trade-offs**:
+- No built-in "remember me" (implemented via token expiration)
+- Token storage security is developer's responsibility
+- Refresh tokens needed for long sessions
+
+**Status**: ✅ Implemented with configurable expiration
+
+---
+
+### **Component Architecture**
+
+**Decision**: Reusable UI components (Button, Card, Modal, etc.) instead of inline styles.
+
+**Why**:
+- **Consistency**: Same look and behavior across app
+- **Maintainability**: Change once, update everywhere
+- **Accessibility**: Built-in ARIA labels and keyboard support
+- **Developer experience**: Faster development with pre-built components
+
+**Implementation**:
+- `components/ui/` for reusable components
+- Props-based customization
+- Consistent styling with Tailwind CSS
+
+**Status**: ✅ Implemented with Button, Card, Modal, Alert, Input, Select, Badge, Skeleton
+
+---
+
 ## Acknowledgments
 
 - FastAPI community for the excellent framework
