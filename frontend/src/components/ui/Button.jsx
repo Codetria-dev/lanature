@@ -1,4 +1,5 @@
 import classNames from '../../utils/classNames'
+import { t } from '../../i18n'
 
 const Button = ({
   children,
@@ -7,6 +8,7 @@ const Button = ({
   type = 'button',
   disabled = false,
   loading = false,
+  loadingText,
   onClick,
   className = '',
   ...props
@@ -38,11 +40,19 @@ const Button = ({
         baseStyles,
         variants[variant],
         sizes[size],
+        loading && 'opacity-75 cursor-wait',
         className
       )}
       {...props}
     >
-      {loading ? 'Carregando...' : children}
+      {loading ? (
+        <span className="flex items-center gap-2">
+          <span className="inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin"></span>
+          {loadingText || t('loadingStates.generic')}
+        </span>
+      ) : (
+        children
+      )}
     </button>
   )
 }
