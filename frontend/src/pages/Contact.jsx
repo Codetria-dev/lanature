@@ -3,7 +3,7 @@ import Card from '../components/ui/Card'
 import Button from '../components/ui/Button'
 import Input from '../components/ui/Input'
 import Alert from '../components/ui/Alert'
-import backgroundBg from '@assets/background.png'
+import { t } from '../i18n'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -27,10 +27,9 @@ export default function Contact() {
     setLoading(true)
     setAlert(null)
 
-    // Simular envio (você pode integrar com um serviço de email ou API)
     setTimeout(() => {
       setLoading(false)
-      setAlert({ type: 'success', message: 'Mensagem enviada com sucesso! Entraremos em contato em breve.' })
+      setAlert({ type: 'success', message: t('contact.messageSent') })
       setFormData({
         name: '',
         email: '',
@@ -41,20 +40,10 @@ export default function Contact() {
   }
 
   return (
-    <div 
-      className="px-4 py-6 min-h-screen relative"
-      style={{
-        backgroundImage: `url(${backgroundBg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-      }}
-    >
-      <div className="absolute inset-0 bg-white/80 backdrop-blur-sm"></div>
-      
-      <div className="relative z-10 max-w-2xl mx-auto">
+    <div className="px-4 py-6 min-h-screen">
+      <div className="max-w-2xl mx-auto">
         {alert && (
-          <div className="mb-4">
+          <div className="mb-4 fixed top-20 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-2xl px-4">
             <Alert variant={alert.type} onClose={() => setAlert(null)}>
               {alert.message}
             </Alert>
@@ -62,15 +51,15 @@ export default function Contact() {
         )}
 
         <Card>
-          <h1 className="text-3xl font-bold mb-6 text-center">Entre em Contato</h1>
+          <h1 className="text-3xl font-bold mb-6 text-center">{t('contact.title')}</h1>
           <p className="text-gray-600 mb-6 text-center">
-            Tem alguma dúvida ou sugestão? Entre em contato conosco!
+            {t('contact.subtitle')}
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                Nome
+                {t('name')}
               </label>
               <Input
                 id="name"
@@ -79,13 +68,13 @@ export default function Contact() {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                placeholder="Seu nome completo"
+                placeholder={t('forms.fullName')}
               />
             </div>
 
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                Email
+                {t('email')}
               </label>
               <Input
                 id="email"
@@ -94,13 +83,13 @@ export default function Contact() {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                placeholder="seu@email.com"
+                placeholder={t('contact.emailPlaceholder')}
               />
             </div>
 
             <div>
               <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
-                Assunto
+                {t('contact.subject')}
               </label>
               <Input
                 id="subject"
@@ -109,13 +98,13 @@ export default function Contact() {
                 value={formData.subject}
                 onChange={handleChange}
                 required
-                placeholder="Assunto da mensagem"
+                placeholder={t('contact.subjectPlaceholder')}
               />
             </div>
 
             <div>
               <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                Mensagem
+                {t('contact.message')}
               </label>
               <textarea
                 id="message"
@@ -125,17 +114,18 @@ export default function Contact() {
                 required
                 rows={6}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#7fa653] focus:border-[#7fa653]"
-                placeholder="Sua mensagem aqui..."
+                placeholder={t('contact.messagePlaceholder')}
               />
             </div>
 
             <div className="flex justify-end">
               <Button
                 type="submit"
-                disabled={loading}
+                loading={loading}
+                loadingText={t('loadingStates.sendingMessage')}
                 className="!bg-[#7fa653] hover:!bg-[#6a8a45] text-white"
               >
-                {loading ? 'Enviando...' : 'Enviar Mensagem'}
+                {t('contact.sendMessage')}
               </Button>
             </div>
           </form>

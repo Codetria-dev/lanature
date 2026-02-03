@@ -1,4 +1,5 @@
 import classNames from '../../utils/classNames'
+import { t } from '../../i18n'
 
 const Alert = ({
   children,
@@ -7,21 +8,67 @@ const Alert = ({
   className = '',
 }) => {
   const variants = {
-    info: 'bg-blue-50 border-blue-200 text-blue-800',
-    success: 'bg-green-50 border-green-200 text-green-800',
-    warning: 'bg-amber-50 border-amber-200 text-amber-800',
-    error: 'bg-red-50 border-red-200 text-red-800',
+    info: {
+      bg: 'bg-blue-50',
+      border: 'border-blue-300',
+      text: 'text-blue-900',
+      icon: 'ℹ️',
+      iconBg: 'bg-blue-100'
+    },
+    success: {
+      bg: 'bg-green-50',
+      border: 'border-green-400',
+      text: 'text-green-900',
+      icon: '✓',
+      iconBg: 'bg-green-100'
+    },
+    warning: {
+      bg: 'bg-amber-50',
+      border: 'border-amber-300',
+      text: 'text-amber-900',
+      icon: '⚠',
+      iconBg: 'bg-amber-100'
+    },
+    error: {
+      bg: 'bg-red-50',
+      border: 'border-red-400',
+      text: 'text-red-900',
+      icon: '✕',
+      iconBg: 'bg-red-100'
+    },
   }
   
+  const variantStyles = variants[variant]
+  
   return (
-    <div className={classNames('border rounded-lg px-4 py-3 shadow-sm', variants[variant], className)}>
-      <div className="flex justify-between items-start">
-        <div className="flex-1 text-sm font-medium">{children}</div>
+    <div 
+      className={classNames(
+        'border-2 rounded-lg px-4 py-3 shadow-md animate-slide-down',
+        variantStyles.bg,
+        variantStyles.border,
+        className
+      )}
+      role="alert"
+    >
+      <div className="flex items-start gap-3">
+        <div className={classNames(
+          'flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold',
+          variantStyles.iconBg,
+          variantStyles.text
+        )}>
+          {variantStyles.icon}
+        </div>
+        <div className={classNames('flex-1 text-sm font-semibold', variantStyles.text)}>
+          {children}
+        </div>
         {onClose && (
           <button
             onClick={onClose}
-            className="ml-4 text-current opacity-60 hover:opacity-100 transition-opacity duration-150 w-5 h-5 flex items-center justify-center rounded hover:bg-black/5"
-            aria-label="Fechar"
+            className={classNames(
+              'flex-shrink-0 text-current opacity-70 hover:opacity-100 transition-opacity duration-150 w-5 h-5 flex items-center justify-center rounded hover:bg-black/10',
+              variantStyles.text
+            )}
+            aria-label={t('common.close')}
           >
             ×
           </button>

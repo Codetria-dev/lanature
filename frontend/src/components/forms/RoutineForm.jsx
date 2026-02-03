@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react'
 import Input from '../ui/Input'
 import Select from '../ui/Select'
 import Button from '../ui/Button'
-import { ROUTINE_FREQUENCIES, ROUTINE_FREQUENCY_LABELS } from '../../constants'
+import { ROUTINE_FREQUENCIES } from '../../constants'
+import { t } from '../../i18n'
 
 const RoutineForm = ({
   routine = null,
@@ -48,13 +49,13 @@ const RoutineForm = ({
     const newErrors = {}
 
     if (!formData.pet_id) {
-      newErrors.pet_id = 'Selecione um pet'
+      newErrors.pet_id = t('forms.petRequired')
     }
     if (!formData.type.trim()) {
-      newErrors.type = 'Tipo é obrigatório'
+      newErrors.type = t('forms.typeRequired')
     }
     if (!formData.time) {
-      newErrors.time = 'Horário é obrigatório'
+      newErrors.time = t('forms.timeRequired')
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -76,13 +77,13 @@ const RoutineForm = ({
 
   const frequencyOptions = Object.values(ROUTINE_FREQUENCIES).map(freq => ({
     value: freq,
-    label: ROUTINE_FREQUENCY_LABELS[freq],
+    label: t(`frequency.${freq}`),
   }))
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <Select
-        label="Pet"
+        label={t('pets.title')}
         required
         value={formData.pet_id}
         onChange={(e) => setFormData({ ...formData, pet_id: e.target.value })}
@@ -91,16 +92,16 @@ const RoutineForm = ({
       />
 
       <Input
-        label="Tipo"
+        label={t('routines.type')}
         required
         value={formData.type}
         onChange={(e) => setFormData({ ...formData, type: e.target.value })}
         error={errors.type}
-        placeholder="Ex: ração, remédio, água"
+        placeholder={t('forms.typePlaceholder')}
       />
 
       <Select
-        label="Frequência"
+        label={t('routines.frequency')}
         required
         value={formData.frequency}
         onChange={(e) => setFormData({ ...formData, frequency: e.target.value })}
@@ -109,7 +110,7 @@ const RoutineForm = ({
       />
 
       <Input
-        label="Horário"
+        label={t('routines.time')}
         type="time"
         required
         value={formData.time}
@@ -126,7 +127,7 @@ const RoutineForm = ({
           onChange={(e) => setFormData({ ...formData, active: e.target.checked })}
         />
         <label htmlFor="active" className="text-sm font-medium text-gray-700">
-          Rotina ativa
+          {t('forms.activeRoutine')}
         </label>
       </div>
 
@@ -134,9 +135,10 @@ const RoutineForm = ({
         <Button
           type="submit"
           loading={loading}
+          loadingText={routine ? t('loadingStates.updatingTask') : t('loadingStates.creatingTask')}
           className="flex-1 !bg-[#7fa653] hover:!bg-[#6a8a45] text-white"
         >
-          {routine ? 'Atualizar' : 'Salvar'}
+          {routine ? t('forms.update') : t('forms.save')}
         </Button>
         <Button
           type="button"
@@ -145,7 +147,7 @@ const RoutineForm = ({
           disabled={loading}
           className="flex-1 !bg-[#cfe0bc] hover:!bg-[#b8d09f] text-gray-800"
         >
-          Cancelar
+          {t('forms.cancel')}
         </Button>
       </div>
     </form>

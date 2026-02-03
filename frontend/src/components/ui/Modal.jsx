@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import Button from './Button'
+import { t } from '../../i18n'
 
 const Modal = ({
   isOpen,
@@ -45,7 +46,7 @@ const Modal = ({
           <button
             onClick={onClose}
             className="text-gray-400 hover:text-gray-600 text-2xl leading-none transition-colors duration-150 w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100"
-            aria-label="Fechar"
+            aria-label={t('common.close')}
           >
             ×
           </button>

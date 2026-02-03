@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Input from '../ui/Input'
 import Button from '../ui/Button'
+import { t } from '../../i18n'
 
 const PetForm = ({
   pet = null,
@@ -30,10 +31,10 @@ const PetForm = ({
     const newErrors = {}
 
     if (!formData.name.trim()) {
-      newErrors.name = 'Nome é obrigatório'
+      newErrors.name = t('forms.petNameRequired')
     }
     if (!formData.species.trim()) {
-      newErrors.species = 'Espécie é obrigatória'
+      newErrors.species = t('forms.speciesRequired')
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -48,25 +49,25 @@ const PetForm = ({
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <Input
-        label="Nome"
+        label={t('name')}
         required
         value={formData.name}
         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
         error={errors.name}
-        placeholder="Nome do pet"
+        placeholder={t('forms.petName')}
       />
 
       <Input
-        label="Espécie"
+        label={t('pets.species')}
         required
         value={formData.species}
         onChange={(e) => setFormData({ ...formData, species: e.target.value })}
         error={errors.species}
-        placeholder="Ex: Cachorro, Gato, etc."
+        placeholder={t('forms.speciesPlaceholder')}
       />
 
       <Input
-        label="Data de Nascimento (opcional)"
+        label={t('forms.birthDateOptional')}
         type="date"
         value={formData.birth_date}
         onChange={(e) => setFormData({ ...formData, birth_date: e.target.value })}
@@ -77,9 +78,10 @@ const PetForm = ({
         <Button
           type="submit"
           loading={loading}
+          loadingText={pet ? t('loadingStates.updatingPet') : t('loadingStates.addingPet')}
           className="flex-1 !bg-[#7fa653] hover:!bg-[#6a8a45] text-white"
         >
-          {pet ? 'Atualizar' : 'Salvar'}
+          {pet ? t('forms.update') : t('forms.save')}
         </Button>
         <Button
           type="button"
@@ -88,7 +90,7 @@ const PetForm = ({
           disabled={loading}
           className="flex-1 !bg-[#cfe0bc] hover:!bg-[#b8d09f] text-gray-800"
         >
-          Cancelar
+          {t('forms.cancel')}
         </Button>
       </div>
     </form>

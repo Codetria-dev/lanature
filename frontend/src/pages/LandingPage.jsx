@@ -47,21 +47,21 @@ export default function LandingPage() {
         </div>
 
         <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8">
-          <Card className="text-center">
-            <h3 className="text-xl font-semibold mb-2">{t('landing.features.what.title')}</h3>
-            <p className="text-gray-600">
+          <Card shadow={false} className="text-center bg-gradient-to-br from-green-50 to-emerald-50 shadow-lg hover:shadow-xl transition-all duration-300 border border-green-100">
+            <h3 className="text-xl font-semibold mb-2 text-green-800">{t('landing.features.what.title')}</h3>
+            <p className="text-gray-700">
               {t('landing.features.what.description')}
             </p>
           </Card>
-          <Card className="text-center">
-            <h3 className="text-xl font-semibold mb-2">{t('landing.features.who.title')}</h3>
-            <p className="text-gray-600">
+          <Card shadow={false} className="text-center bg-gradient-to-br from-blue-50 to-cyan-50 shadow-lg hover:shadow-xl transition-all duration-300 border border-blue-100">
+            <h3 className="text-xl font-semibold mb-2 text-blue-800">{t('landing.features.who.title')}</h3>
+            <p className="text-gray-700">
               {t('landing.features.who.description')}
             </p>
           </Card>
-          <Card className="text-center">
-            <h3 className="text-xl font-semibold mb-2">{t('landing.features.benefits.title')}</h3>
-            <p className="text-gray-600">
+          <Card shadow={false} className="text-center bg-gradient-to-br from-purple-50 to-pink-50 shadow-lg hover:shadow-xl transition-all duration-300 border border-purple-100">
+            <h3 className="text-xl font-semibold mb-2 text-purple-800">{t('landing.features.benefits.title')}</h3>
+            <p className="text-gray-700">
               {t('landing.features.benefits.description')}
             </p>
           </Card>

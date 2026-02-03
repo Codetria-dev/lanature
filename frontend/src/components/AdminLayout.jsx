@@ -29,20 +29,27 @@ export default function AdminLayout({ children }) {
         </div>
       </nav>
       <main className="container-custom py-8">
+        <div className="mb-6">
+          <Link to={ROUTES.DASHBOARD}>
+            <Button variant="ghost" size="sm">
+              {t('navigation.home')}
+            </Button>
+          </Link>
+        </div>
         {children}
       </main>
       <footer className="bg-white border-t border-gray-100 mt-auto">
         <div className="container-custom py-6">
           <div className="flex flex-col sm:flex-row justify-between items-center space-y-3 sm:space-y-0">
             <div className="text-sm text-gray-500">
-              © {new Date().getFullYear()} LaNature. Todos os direitos reservados.
+              © {new Date().getFullYear()} LaNature. {t('footer.rights')}
             </div>
             <div className="flex space-x-6">
               <Link
                 to={ROUTES.CONTACT}
                 className="text-sm text-gray-500 hover:text-green-600 transition-colors duration-150"
               >
-                Contato
+                {t('navigation.contact')}
               </Link>
             </div>
           </div>

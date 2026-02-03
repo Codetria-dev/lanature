@@ -6,7 +6,6 @@ import Button from '../components/ui/Button'
 import Alert from '../components/ui/Alert'
 import { ROUTES } from '../constants'
 import { t } from '../i18n'
-import backgroundBg from '@assets/background.png'
 
 export default function Register() {
   const [name, setName] = useState('')
@@ -24,9 +23,7 @@ export default function Register() {
 
     try {
       await register(name, email, password)
-      // Aguardar um pouco para o user ser atualizado no contexto
       setTimeout(() => {
-        // Usuários registrados sempre são usuários comuns, não superusers
         navigate(ROUTES.DASHBOARD)
       }, 200)
     } catch (err) {
@@ -36,22 +33,11 @@ export default function Register() {
   }
 
   return (
-    <div 
-      className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative"
-      style={{
-        backgroundImage: `url(${backgroundBg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-      }}
-    >
-      {/* Overlay for better readability */}
-      <div className="absolute inset-0 bg-white/80 backdrop-blur-sm"></div>
-      
-      <div className="max-w-md w-full space-y-8 relative z-10">
+    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8">
         <div>
           <h1 className="text-center text-4xl font-serif text-gray-800 mb-2">
-            Welcome to LaNature
+            {t('admin.welcome')}
           </h1>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
             {t('auth.registerTitle')}
@@ -100,7 +86,13 @@ export default function Register() {
           </div>
 
           <div>
-            <Button type="submit" disabled={loading} loading={loading} className="w-full">
+            <Button 
+              type="submit" 
+              disabled={loading} 
+              loading={loading} 
+              loadingText={t('loadingStates.creatingAccount')}
+              className="w-full"
+            >
               {t('register')}
             </Button>
           </div>
