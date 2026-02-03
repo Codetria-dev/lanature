@@ -26,7 +26,7 @@ function PublicRoute({ children }) {
   }
   
   if (user) {
-    return <Navigate to={user.is_superuser ? "/admin" : "/dashboard"} replace />
+    return <Navigate to="/dashboard" replace />
   }
   
   return children

@@ -87,10 +87,16 @@ LaNature was created to solve these pain points by providing:
 - Password protection
 
 ### **Admin Panel**
+
+> **Note**: The admin panel is under development and will be finalized in a future iteration.  
+> Current focus was on user-facing features, scalability, and internationalization.
+
 - User management (activate/deactivate users)
 - System statistics and analytics
 - Administrative settings configuration
 - Monitor platform usage and health
+
+**Access**: The admin panel is not publicly accessible through the UI. It can be accessed directly via `/admin` URL for authorized superusers only.
 
 ### **Internationalization**
 - English and Portuguese language support
@@ -345,6 +351,9 @@ cd backend
 | DELETE | `/api/v1/logs/{id}` | Delete log |
 
 ### Admin Endpoints
+
+> ** Note**: Admin endpoints are functional but the admin panel UI is under development.  
+> These endpoints are available for authorized superusers only.
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
