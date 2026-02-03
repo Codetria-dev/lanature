@@ -8,7 +8,8 @@ import Modal from '../components/ui/Modal'
 import PetForm from '../components/forms/PetForm'
 import Alert from '../components/ui/Alert'
 import { MESSAGES } from '../constants'
-import backgroundBg from '@assets/background.png'
+import { t, formatDate } from '../i18n'
+import ListSkeleton from '../components/ui/ListSkeleton'
 
 export default function Pets() {
   const { pets, loading, error, createPet, updatePet, deletePet } = usePets()
@@ -30,8 +31,8 @@ export default function Pets() {
       if (result.success) {
         setShowModal(false)
         setEditingPet(null)
-        setAlert({ type: 'success', message: editingPet ? 'Pet atualizado com sucesso!' : 'Pet criado com sucesso!' })
-        setTimeout(() => setAlert(null), 3000)
+        setAlert({ type: 'success', message: editingPet ? t('pets.petUpdated') : t('pets.petCreated') })
+        setTimeout(() => setAlert(null), 5000)
       } else {
         setAlert({ type: 'error', message: result.error || MESSAGES.ERROR_GENERIC })
       }
@@ -52,8 +53,8 @@ export default function Pets() {
 
     const result = await deletePet(id)
     if (result.success) {
-      setAlert({ type: 'success', message: 'Pet excluído com sucesso!' })
-      setTimeout(() => setAlert(null), 3000)
+      setAlert({ type: 'success', message: t('pets.petDeleted') })
+      setTimeout(() => setAlert(null), 5000)
     } else {
       setAlert({ type: 'error', message: result.error || MESSAGES.ERROR_GENERIC })
     }
@@ -71,37 +72,22 @@ export default function Pets() {
 
   if (loading) {
     return (
-      <div 
-        className="px-4 py-6 min-h-screen relative"
-        style={{
-          backgroundImage: `url(${backgroundBg})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-        }}
-      >
-        <div className="absolute inset-0 bg-white/80 backdrop-blur-sm"></div>
-        <div className="relative z-10 text-center py-12">{MESSAGES.LOADING}</div>
+      <div className="px-4 py-6 min-h-screen">
+        <div className="container-custom py-8">
+          <div className="text-center py-4 text-gray-500 text-sm">
+            {t('loadingStates.loadingPets')}
+          </div>
+          <ListSkeleton count={3} showAvatar={true} showActions={true} />
+        </div>
       </div>
     )
   }
 
   return (
-    <div 
-      className="px-4 py-6 min-h-screen relative"
-      style={{
-        backgroundImage: `url(${backgroundBg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-      }}
-    >
-      {/* Overlay for better readability */}
-      <div className="absolute inset-0 bg-white/80 backdrop-blur-sm"></div>
-      
-      <div className="relative z-10">
+    <div className="px-4 py-6 min-h-screen">
+      <div className="container-custom">
         {alert && (
-          <div className="mb-4">
+          <div className="mb-4 fixed top-20 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-2xl px-4">
             <Alert variant={alert.type} onClose={() => setAlert(null)}>
               {alert.message}
             </Alert>
@@ -109,10 +95,10 @@ export default function Pets() {
         )}
 
         <PageHeader
-          title="Pets"
+          title={t('pets.title')}
           action={openModal}
-          actionLabel="Adicionar Pet"
-          actionClassName="!bg-[#7fa653] hover:!bg-[#6a8a45] text-white"
+          actionLabel={t('pets.add')}
+          actionClassName="!bg-[#7fa653] hover:!bg-[#6a8a45] text-white shadow-md hover:shadow-lg font-semibold"
         />
 
         {error && (
@@ -123,59 +109,60 @@ export default function Pets() {
 
         {pets.length === 0 ? (
         <EmptyState
-          title="Nenhum pet cadastrado ainda"
-          description="Comece adicionando seu primeiro pet"
+          title={t('pets.none')}
+          description={t('pets.startAdding')}
           action={openModal}
-          actionLabel="Adicionar primeiro pet"
-          icon="🐾"
+          actionLabel={t('pets.addFirst')}
           actionClassName="!bg-[#7fa653] hover:!bg-[#6a8a45] text-white"
         />
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {pets.map(pet => (
-            <Card key={pet.id} className="card-hover">
-              <Card.Header>
-                <div className="flex justify-between items-start">
+          {pets.map((pet) => {
+            return (
+              <Card 
+                key={pet.id}
+              >
+                <Card.Header className="pb-4">
                   <div>
-                    <h3 className="text-xl font-semibold">{pet.name}</h3>
-                    <p className="text-gray-500 mt-1">{pet.species}</p>
+                    <h3 className="text-xl font-bold text-gray-900">{pet.name}</h3>
+                    <p className="text-sm text-gray-600 mt-1">{pet.species}</p>
+                    {pet.birth_date && (
+                      <p className="text-xs text-gray-500 mt-2">
+                        {t('pets.bornOn')} <span className="font-medium">{formatDate(pet.birth_date)}</span>
+                      </p>
+                    )}
                   </div>
-                </div>
-                {pet.birth_date && (
-                  <p className="text-sm text-gray-400 mt-2">
-                    Nascido em: {new Date(pet.birth_date).toLocaleDateString('pt-BR')}
-                  </p>
-                )}
-              </Card.Header>
-              <Card.Footer>
-                <div className="flex space-x-2">
-                  <Button
-                    variant="info"
-                    size="sm"
-                    onClick={() => handleEdit(pet)}
-                    className="flex-1 !bg-[#76bd9b] hover:!bg-[#65a888] text-white"
-                  >
-                    Editar
-                  </Button>
-                  <Button
-                    variant="danger"
-                    size="sm"
-                    onClick={() => handleDelete(pet.id)}
-                    className="flex-1 !bg-[#cfe0bc] hover:!bg-[#b8d09f] text-gray-800"
-                  >
-                    Excluir
-                  </Button>
-                </div>
-              </Card.Footer>
-            </Card>
-          ))}
+                </Card.Header>
+                <Card.Footer className="pt-4">
+                  <div className="flex space-x-2">
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={() => handleEdit(pet)}
+                      className="flex-1"
+                    >
+                      {t('pets.edit')}
+                    </Button>
+                    <Button
+                      variant="danger"
+                      size="sm"
+                      onClick={() => handleDelete(pet.id)}
+                      className="flex-1"
+                    >
+                      {t('pets.delete')}
+                    </Button>
+                  </div>
+                </Card.Footer>
+              </Card>
+            )
+          })}
         </div>
         )}
 
         <Modal
           isOpen={showModal}
           onClose={closeModal}
-          title={editingPet ? 'Editar Pet' : 'Novo Pet'}
+          title={editingPet ? t('pets.edit') : t('pets.newPet')}
           size="md"
         >
           <PetForm
