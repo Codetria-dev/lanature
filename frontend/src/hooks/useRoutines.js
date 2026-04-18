@@ -11,7 +11,7 @@ export const useRoutines = () => {
       setLoading(true)
       setError(null)
       const response = await api.get('/routines/')
-      setRoutines(response.data)
+      setRoutines(response.data.data || response.data)
     } catch (err) {
       setError(err.response?.data?.detail || 'Error loading routines')
     } finally {

@@ -19,7 +19,7 @@ export const useLogs = (filters = {}) => {
       }
 
       const response = await api.get(url)
-      let filteredLogs = response.data
+      let filteredLogs = response.data.data || response.data
 
       if (filters.status && filters.status !== 'all') {
         filteredLogs = filteredLogs.filter(log => log.status === filters.status)

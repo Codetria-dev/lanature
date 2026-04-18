@@ -11,7 +11,7 @@ export const usePets = () => {
       setLoading(true)
       setError(null)
       const response = await api.get('/pets/')
-      setPets(response.data)
+      setPets(response.data.data || response.data)
     } catch (err) {
       setError(err.response?.data?.detail || 'Error loading pets')
     } finally {
