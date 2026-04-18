@@ -10,24 +10,24 @@ export const useLogs = (filters = {}) => {
     try {
       setLoading(true)
       setError(null)
-      
-      let url = '/api/v1/logs/'
+
+      let url = '/logs/'
       if (filters.petId && filters.petId !== 'all') {
-        url = `/api/v1/logs/pet/${filters.petId}`
+        url = `/logs/pet/${filters.petId}`
       } else if (filters.taskId) {
-        url = `/api/v1/logs/task/${filters.taskId}`
+        url = `/logs/task/${filters.taskId}`
       }
-      
+
       const response = await api.get(url)
       let filteredLogs = response.data
-      
+
       if (filters.status && filters.status !== 'all') {
         filteredLogs = filteredLogs.filter(log => log.status === filters.status)
       }
-      
+
       // Sort by date (most recent first)
       filteredLogs.sort((a, b) => new Date(b.date) - new Date(a.date))
-      
+
       setLogs(filteredLogs)
     } catch (err) {
       setError(err.response?.data?.detail || 'Error loading history')
@@ -38,7 +38,7 @@ export const useLogs = (filters = {}) => {
 
   const createLog = async (logData) => {
     try {
-      const response = await api.post('/api/v1/logs/', logData)
+      const response = await api.post('/logs/', logData)
       setLogs([response.data, ...logs])
       return { success: true, data: response.data }
     } catch (err) {
@@ -51,12 +51,12 @@ export const useLogs = (filters = {}) => {
   const updateLog = async (id, logData) => {
     try {
       // The API updates or creates the log automatically
-      const response = await api.post('/api/v1/logs/', {
+      const response = await api.post('/logs/', {
         task_id: logData.task_id,
         date: logData.date,
         status: logData.status
       })
-      setLogs(logs.map(log => 
+      setLogs(logs.map(log =>
         log.id === id ? response.data : log
       ))
       return { success: true, data: response.data }
@@ -69,7 +69,7 @@ export const useLogs = (filters = {}) => {
 
   const deleteLog = async (id) => {
     try {
-      await api.delete(`/api/v1/logs/${id}`)
+      await api.delete(`/logs/${id}`)
       setLogs(logs.filter(log => log.id !== id))
       return { success: true }
     } catch (err) {

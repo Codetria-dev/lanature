@@ -10,7 +10,7 @@ export const useRoutines = () => {
     try {
       setLoading(true)
       setError(null)
-      const response = await api.get('/api/v1/routines/')
+      const response = await api.get('/routines/')
       setRoutines(response.data)
     } catch (err) {
       setError(err.response?.data?.detail || 'Error loading routines')
@@ -21,7 +21,7 @@ export const useRoutines = () => {
 
   const createRoutine = async (routineData) => {
     try {
-      const response = await api.post('/api/v1/routines/', routineData)
+      const response = await api.post('/routines/', routineData)
       setRoutines([...routines, response.data])
       return { success: true, data: response.data }
     } catch (err) {
@@ -33,7 +33,7 @@ export const useRoutines = () => {
 
   const updateRoutine = async (id, routineData) => {
     try {
-      const response = await api.put(`/api/v1/routines/task/${id}`, routineData)
+      const response = await api.put(`/routines/task/${id}`, routineData)
       setRoutines(routines.map(routine => routine.id === id ? response.data : routine))
       return { success: true, data: response.data }
     } catch (err) {
@@ -45,7 +45,7 @@ export const useRoutines = () => {
 
   const deleteRoutine = async (id) => {
     try {
-      await api.delete(`/api/v1/routines/task/${id}`)
+      await api.delete(`/routines/task/${id}`)
       setRoutines(routines.filter(routine => routine.id !== id))
       return { success: true }
     } catch (err) {

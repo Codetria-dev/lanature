@@ -10,7 +10,7 @@ export const usePets = () => {
     try {
       setLoading(true)
       setError(null)
-      const response = await api.get('/api/v1/pets/')
+      const response = await api.get('/pets/')
       setPets(response.data)
     } catch (err) {
       setError(err.response?.data?.detail || 'Error loading pets')
@@ -21,7 +21,7 @@ export const usePets = () => {
 
   const createPet = async (petData) => {
     try {
-      const response = await api.post('/api/v1/pets/', {
+      const response = await api.post('/pets/', {
         ...petData,
         birth_date: petData.birth_date || null
       })
@@ -36,7 +36,7 @@ export const usePets = () => {
 
   const updatePet = async (id, petData) => {
     try {
-      const response = await api.put(`/api/v1/pets/${id}`, petData)
+      const response = await api.put(`/pets/${id}`, petData)
       setPets(pets.map(pet => pet.id === id ? response.data : pet))
       return { success: true, data: response.data }
     } catch (err) {
@@ -48,7 +48,7 @@ export const usePets = () => {
 
   const deletePet = async (id) => {
     try {
-      await api.delete(`/api/v1/pets/${id}`)
+      await api.delete(`/pets/${id}`)
       setPets(pets.filter(pet => pet.id !== id))
       return { success: true }
     } catch (err) {
