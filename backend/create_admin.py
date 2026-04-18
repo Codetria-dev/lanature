@@ -2,26 +2,31 @@
 Script to create initial admin user
 Run: python create_admin.py
 """
-from app.database import SessionLocal, engine, Base
+import os
+from app.database import SessionLocal
 from app.models import User
 from app.auth import get_password_hash
 
-# Ensure tables exist
-Base.metadata.create_all(bind=engine)
-
 db = SessionLocal()
+admin_email = os.getenv("ADMIN_EMAIL")
+admin_password = os.getenv("ADMIN_PASSWORD")
+
+if not admin_email or not admin_password:
+    raise RuntimeError("Set ADMIN_EMAIL and ADMIN_PASSWORD environment variables before running this script.")
+if len(admin_password) < 12:
+    raise RuntimeError("ADMIN_PASSWORD must be at least 12 characters long.")
 
 try:
     # Check if admin already exists
-    admin = db.query(User).filter(User.email == "admin@lanature.com").first()
+    admin = db.query(User).filter(User.email == admin_email).first()
     if admin:
         print("Admin user already exists!")
     else:
         # Create admin user
         admin = User(
             name="Admin",
-            email="admin@lanature.com",
-            password_hash=get_password_hash("Admin123"),
+            email=admin_email,
+            password_hash=get_password_hash(admin_password),
             is_active=True,
             is_superuser=True
         )
@@ -29,8 +34,7 @@ try:
         db.add(admin)
         db.commit()
         print("Admin criado com sucesso")
-        print("Email: admin@lanature.com")
-        print("Password: Admin123")
+        print(f"Email: {admin_email}")
 except Exception as e:
     db.rollback()
     print(f"[ERROR] Error creating admin user: {e}")

@@ -3,6 +3,8 @@ from fastapi import HTTPException, status
 from typing import List
 from app.models import Pet, Routine
 from app.schemas import PetCreate, PetUpdate
+from app.domain.settings_service import settings_service
+from app.domain.billing_service import billing_service
 
 
 class PetService:
@@ -25,6 +27,18 @@ class PetService:
     @staticmethod
     def create(pet_data: PetCreate, user_id: int, db: Session) -> Pet:
         """Create a new pet and automatically create a routine for it"""
+        settings_service.ensure_defaults(db)
+        max_pets_per_user, _ = billing_service.get_limits(db, user_id)
+        if max_pets_per_user <= 0:
+            max_pets_per_user = settings_service.get_int(db, "max_pets_per_user", 3)
+
+        pets_count = db.query(Pet).filter(Pet.user_id == user_id).count()
+        if pets_count >= max_pets_per_user:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Maximum pets per user reached ({max_pets_per_user})",
+            )
+
         pet = Pet(
             user_id=user_id,
             name=pet_data.name,

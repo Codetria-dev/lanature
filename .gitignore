@@ -41,3 +41,7 @@ Thumbs.db
 # Database
 *.db
 *.sqlite
+
+# Uploaded files (Phase 5)
+backend/uploads/
+uploads/

@@ -1,9 +1,12 @@
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import IntegrityError
 from fastapi import HTTPException, status
 from typing import List
 from datetime import datetime
 from app.models import Routine, RoutineTask, Pet, RoutineLog, Reminder, ReminderLog
 from app.schemas import RoutineTaskCreate, RoutineTaskUpdate, RoutineLogCreate, ReminderCreate, ReminderUpdate, ReminderLogCreate, ReminderLogUpdate
+from app.domain.settings_service import settings_service
+from app.domain.billing_service import billing_service
 
 
 class ReminderService:
@@ -65,7 +68,18 @@ class ReminderService:
     @staticmethod
     def create_task(task_data: RoutineTaskCreate, user_id: int, db: Session) -> RoutineTask:
         """Create a new routine task (adds task to pet's routine)"""
+        settings_service.ensure_defaults(db)
+        _, max_routines_per_pet = billing_service.get_limits(db, user_id)
+        if max_routines_per_pet <= 0:
+            max_routines_per_pet = settings_service.get_int(db, "max_routines_per_pet", 10)
+
         routine = ReminderService.get_or_create_routine(task_data.pet_id, user_id, db)
+        tasks_count = db.query(RoutineTask).filter(RoutineTask.routine_id == routine.id).count()
+        if tasks_count >= max_routines_per_pet:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Maximum routine tasks per pet reached ({max_routines_per_pet})",
+            )
         
         task = RoutineTask(
             routine_id=routine.id,
@@ -163,7 +177,22 @@ class ReminderService:
             status=log_data.status
         )
         db.add(log)
-        db.commit()
+        try:
+            db.commit()
+        except IntegrityError:
+            # Another concurrent request inserted the same (task_id, date).
+            # Roll back and apply the update to the now-existing row.
+            db.rollback()
+            existing_log = db.query(RoutineLog).filter(
+                RoutineLog.task_id == log_data.task_id,
+                RoutineLog.date == log_data.date
+            ).first()
+            if not existing_log:
+                raise
+            existing_log.status = log_data.status
+            db.commit()
+            db.refresh(existing_log)
+            return existing_log
         db.refresh(log)
         return log
 
@@ -173,6 +202,28 @@ class ReminderService:
         log = ReminderService.get_log_by_id(log_id, user_id, db)
         db.delete(log)
         db.commit()
+
+    # Phase 5: Query methods for pagination
+    @staticmethod
+    def get_all_logs_query(user_id: int, db: Session):
+        """Get query for all logs for a user (for pagination)"""
+        return db.query(RoutineLog).join(RoutineTask).join(Routine).join(Pet).filter(
+            Pet.user_id == user_id
+        ).order_by(RoutineLog.date.desc())
+
+    @staticmethod
+    def get_logs_by_task_query(task_id: int, user_id: int, db: Session):
+        """Get query for logs by task (for pagination)"""
+        ReminderService.verify_routine_task_ownership(task_id, user_id, db)
+        return db.query(RoutineLog).filter(RoutineLog.task_id == task_id).order_by(RoutineLog.date.desc())
+
+    @staticmethod
+    def get_logs_by_pet_query(pet_id: int, user_id: int, db: Session):
+        """Get query for logs by pet (for pagination)"""
+        ReminderService.verify_pet_ownership(pet_id, user_id, db)
+        return db.query(RoutineLog).join(RoutineTask).join(Routine).filter(
+            Routine.pet_id == pet_id
+        ).order_by(RoutineLog.date.desc())
 
     # Reminder methods (new entity)
     @staticmethod

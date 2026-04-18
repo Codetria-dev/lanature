@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-// Remove /api/v1 do final do baseURL se existir (para evitar duplicação)
-// As chamadas já incluem /api/v1 no path
-const baseURL = (import.meta.env.VITE_API_URL || '').replace(/\/api\/v1\/?$/, '');
+// In development, use the Vite proxy (all /api requests proxied to http://localhost:8000)
+// In production, use the environment variable or absolute URL
+const baseURL = import.meta.env.VITE_API_URL || '/api/v1';
 
 export const api = axios.create({
   baseURL: baseURL,

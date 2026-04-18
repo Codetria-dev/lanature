@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
 
   const fetchUser = async () => {
     try {
-      const response = await api.get('/api/v1/auth/me')
+      const response = await api.get('/auth/me')
       setUser(response.data)
     } catch (error) {
       // 401 ou 403 = token inválido ou usuário sem permissão
@@ -41,26 +41,26 @@ export const AuthProvider = ({ children }) => {
   }
 
   const login = async (email, password) => {
-    const response = await api.post('/api/v1/auth/login', {
+    const response = await api.post('/auth/login', {
       email,
       password
     })
     const { access_token } = response.data
-    
+
     localStorage.setItem('token', access_token)
     api.defaults.headers.common['Authorization'] = `Bearer ${access_token}`
-    
+
     await fetchUser()
     return response.data
   }
-  
+
   // Helper to check if user is superuser
   const isSuperuser = () => {
     return user?.is_superuser === true
   }
 
   const register = async (name, email, password) => {
-    const response = await api.post('/api/v1/auth/register', {
+    const response = await api.post('/auth/register', {
       name,
       email,
       password
