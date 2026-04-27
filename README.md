@@ -1,11 +1,18 @@
-# LaNature - Pet Care Management SaaS
+![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?logo=fastapi&logoColor=white)
+![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-4169E1?logo=postgresql&logoColor=white)
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed_on-Vercel-000000?logo=vercel&logoColor=white)]
 
-> **A comprehensive SaaS platform for managing your pets' daily care routines, medications, and health tracking.**
+# 🌿 LaNature - Pet Care Management SaaS
 
-[![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=flat&logo=fastapi)](https://fastapi.tiangolo.com/)
-[![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)](https://reactjs.org/)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=flat&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+> A comprehensive SaaS platform for managing your pets' daily care routines, medications, and health tracking.
+
+##  Live Demo
+
+[ LaNature - Live Demo](https://lanature.vercel.app/home)
+
+>  Backend runs on free tier - first request may take 15-30 seconds
 
 ---
 
@@ -190,23 +197,23 @@ LaNature was created to solve these pain points by providing:
 
 ## Screenshots
 
-> **Note**: Add screenshots of your application here. Suggested screenshots:
-> - Landing page
-> - Dashboard view
-> - Pet management interface
-> - Routine creation form
-> - Care history timeline
-> - Admin panel
+![Dashboard](assets/board.png)
+*Dashboard overview with pet care tasks*
 
-**Example structure:**
-```
-![Landing Page](docs/screenshots/landing.png)
-![Dashboard](docs/screenshots/dashboard.png)
-![Pet Management](docs/screenshots/pets.png)
-![Routines](docs/screenshots/routines.png)
-![History](docs/screenshots/history.png)
-![Admin Panel](docs/screenshots/admin.png)
-```
+![Empty States](assets/empty-home.png)
+*Onboarding empty state*
+
+![Pet Management](assets/empty-pets.png)
+*Pets management interface*
+
+![Routines](assets/empty-routines.png)
+*Care routines management*
+
+![History](assets/empty-history.png)
+*Care history timeline*
+
+![Portuguese Translation](assets/PT-language.png)
+*Interface em Português (PT-BR)*
 
 ---
 
@@ -223,7 +230,7 @@ LaNature was created to solve these pain points by providing:
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/lanature.git
+git clone https://github.com/Codetria-dev/lanature
 cd lanature/backend
 ```
 
@@ -487,7 +494,7 @@ This section documents key design decisions and the reasoning behind them. Under
 - No built-in fallback chains (we implemented our own)
 - Less community support compared to established libraries
 
-**Status**: ✅ Implemented with `plural()`, `formatDate()`, `formatNumber()` helpers
+**Status**: Implemented with `plural()`, `formatDate()`, `formatNumber()` helpers
 
 ---
 
@@ -506,7 +513,7 @@ This section documents key design decisions and the reasoning behind them. Under
 - Secondary actions: Links or subtle buttons
 - Informational cards: Neutral colors, reduced visual weight
 
-**Status**: ✅ Implemented on Dashboard
+**Status**:  Implemented on Dashboard
 
 ---
 
@@ -525,7 +532,7 @@ This section documents key design decisions and the reasoning behind them. Under
 - `loadingText` prop in Button component
 - Fallback to generic message if not specified
 
-**Status**: ✅ Implemented across all forms and pages
+**Status**:  Implemented across all forms and pages
 
 ---
 
@@ -544,7 +551,7 @@ This section documents key design decisions and the reasoning behind them. Under
 - `View History` (not "See History" or "Check History")
 - `Edit Pet` (consistent across all edit actions)
 
-**Status**: ✅ Applied across all UI text
+**Status**:  Applied across all UI text
 
 ---
 
@@ -563,7 +570,7 @@ This section documents key design decisions and the reasoning behind them. Under
 - 500: "Something went wrong" with retry and home options
 - Both pages use same design system and branding
 
-**Status**: ✅ Implemented
+**Status**:  Implemented
 
 ---
 
@@ -582,7 +589,7 @@ This section documents key design decisions and the reasoning behind them. Under
 - Error messages from i18n for consistency
 - Visual indicators (red borders, error text)
 
-**Status**: ✅ Implemented in PetForm and RoutineForm
+**Status**:  Implemented in PetForm and RoutineForm
 
 ---
 
@@ -601,7 +608,7 @@ This section documents key design decisions and the reasoning behind them. Under
 - Migration scripts must work for both
 - Testing on both databases recommended
 
-**Status**: ✅ Implemented with database-agnostic migrations
+**Status**:  Implemented with database-agnostic migrations
 
 ---
 
@@ -620,7 +627,7 @@ This section documents key design decisions and the reasoning behind them. Under
 - Token storage security is developer's responsibility
 - Refresh tokens needed for long sessions
 
-**Status**: ✅ Implemented with configurable expiration
+**Status**:  Implemented with configurable expiration
 
 ---
 
@@ -639,7 +646,7 @@ This section documents key design decisions and the reasoning behind them. Under
 - Props-based customization
 - Consistent styling with Tailwind CSS
 
-**Status**: ✅ Implemented with Button, Card, Modal, Alert, Input, Select, Badge, Skeleton
+**Status**:  Implemented with Button, Card, Modal, Alert, Input, Select, Badge, Skeleton
 
 ---
 

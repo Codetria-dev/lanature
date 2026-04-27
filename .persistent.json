@@ -1,0 +1,13 @@
+{
+  "agent": "claude-code",
+  "agents": [
+    "claude-code"
+  ],
+  "agentRoot": "C:\\Users\\vigon\\Desktop\\codetria\\lanature",
+  "stack": [],
+  "skills": [],
+  "obsidianPath": ".claude-memory",
+  "pinnedFolders": [],
+  "lastSync": "2026-04-18T18:25:03.022Z",
+  "activeSpec": null
+}

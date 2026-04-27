@@ -1,0 +1,16 @@
+# Obsidian workspace files (user-specific, changes frequently)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# Archived sessions (bulk historical data, optional to exclude)
+sessions/_archive/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editor files
+*.swp
+*.swo
+*~
