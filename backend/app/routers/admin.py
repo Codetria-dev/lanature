@@ -124,10 +124,11 @@ def get_stats(
     """Get system statistics"""
     total_users = db.query(func.count(User.id)).scalar() or 0
     total_pets = db.query(func.count(Pet.id)).scalar() or 0
+    total_routines = db.query(func.count(RoutineTask.id)).scalar() or 0
     total_active_routines = db.query(func.count(RoutineTask.id)).filter(
         RoutineTask.active == ActiveStatus.ACTIVE.value
     ).scalar() or 0
-    
+
     # Routines completed today
     # Decision: Using RoutineLogStatus.DONE constant instead of hardcoded string
     today = date.today()
@@ -137,7 +138,7 @@ def get_stats(
             RoutineLog.status == RoutineLogStatus.DONE.value
         )
     ).scalar() or 0
-    
+
     # Active users in last 7 days (users who have created logs)
     seven_days_ago = datetime.utcnow() - timedelta(days=7)
     user_ids_with_logs = db.query(func.distinct(Pet.user_id)).join(
@@ -149,13 +150,13 @@ def get_stats(
     ).filter(
         RoutineLog.date >= seven_days_ago.date()
     ).all()
-    
+
     active_users_last_7_days = len(set([uid[0] for uid in user_ids_with_logs]))
-    
+
     return {
         "total_users": total_users,
         "total_pets": total_pets,
-        "total_routines": total_active_routines,
+        "total_routines": total_routines,
         "total_active_routines": total_active_routines,
         "routines_completed_today": routines_completed_today,
         "active_users_last_7_days": active_users_last_7_days
@@ -274,7 +275,15 @@ def restore_backup(
     Response includes restoration status and created safety backup.
     """
     try:
-        # Verify backup integrity first
+        # Check if backup exists first
+        backup_file = backup_service._find_backup_file(backup_id)
+        if not backup_file:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Backup {backup_id} not found"
+            )
+
+        # Verify backup integrity
         if not backup_service.verify_backup_integrity(backup_id):
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
@@ -291,6 +300,8 @@ def restore_backup(
                 "restored_at": datetime.utcnow().isoformat(),
                 "message": "Database restored successfully. A safety backup was created before restoration."
             }
+    except HTTPException:
+        raise
     except FileNotFoundError:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,

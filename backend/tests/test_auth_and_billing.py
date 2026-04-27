@@ -36,7 +36,7 @@ def test_change_plan_cancel_and_reactivate(client, auth_headers):
 def test_password_reset_flow(client, db, test_user):
     email = test_user.email
     old_password = "testpass123"
-    new_password = "NewStrongPass456"
+    new_password = "NewStrongPass456!"
 
     req_resp = client.post("/api/v1/auth/request-password-reset", json={"email": email})
     assert req_resp.status_code == 202

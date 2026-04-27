@@ -9,7 +9,7 @@ from fastapi.testclient import TestClient
 from app.main import app
 from app.models import User
 from app.auth import get_password_hash, create_access_token
-from app.database import SessionLocal
+from app.database import get_db
 from app.domain.webhook_service import webhook_manager, WebhookEvent, WebhookPayload
 
 
@@ -18,13 +18,15 @@ from app.domain.webhook_service import webhook_manager, WebhookEvent, WebhookPay
 # ============================================================================
 
 @pytest.fixture
-def client():
-    """FastAPI test client."""
-    return TestClient(app)
+def client(db):
+    """FastAPI test client with overridden database."""
+    app.dependency_overrides[get_db] = lambda: db
+    yield TestClient(app)
+    app.dependency_overrides.clear()
 
 
 @pytest.fixture
-def user(db_session):
+def user(db):
     """Create user for testing."""
     user = User(
         name="Test User",
@@ -33,9 +35,9 @@ def user(db_session):
         is_superuser=False,
         is_active=True
     )
-    db_session.add(user)
-    db_session.commit()
-    db_session.refresh(user)
+    db.add(user)
+    db.commit()
+    db.refresh(user)
     return user
 
 

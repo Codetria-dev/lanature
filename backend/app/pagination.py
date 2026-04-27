@@ -27,8 +27,8 @@ T = TypeVar('T')
 
 class PaginationParams(BaseModel):
     """Query parameters for pagination."""
-    page: int = Field(1, ge=1, description="Page number (1-indexed)")
-    limit: int = Field(10, ge=1, le=100, description="Items per page (max 100)")
+    page: int = Field(1, ge=0, description="Page number (0 defaults to 1)")
+    limit: int = Field(10, ge=1, description="Items per page (capped at 100 automatically)")
 
 
 class PaginationInfo(BaseModel):

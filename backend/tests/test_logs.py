@@ -34,7 +34,9 @@ class TestLogs:
         """Test listing logs when none exist"""
         response = client.get("/api/v1/logs/", headers=auth_headers)
         assert response.status_code == 200
-        assert response.json() == []
+        data = response.json()
+        assert data["data"] == []
+        assert data["pagination"]["total"] == 0
 
     def test_create_log_success(self, client: TestClient, auth_headers, pet_and_task):
         """Test creating an activity log"""
@@ -45,13 +47,13 @@ class TestLogs:
             json={
                 "task_id": task_id,
                 "date": str(date.today()),
-                "status": "DONE",
+                "status": "done",
             },
             headers=auth_headers,
         )
         assert response.status_code == 201
         data = response.json()
-        assert data["status"] == "DONE"
+        assert data["status"] == "done"
         assert "id" in data
 
     def test_create_log_invalid_status(
@@ -83,7 +85,7 @@ class TestLogs:
             json={
                 "task_id": task_id,
                 "date": "2024-01-15",
-                "status": "DONE",
+                "status": "done",
             },
             headers=auth_headers,
         )
@@ -92,7 +94,7 @@ class TestLogs:
             json={
                 "task_id": task_id,
                 "date": "2024-01-16",
-                "status": "SKIPPED",
+                "status": "skipped",
             },
             headers=auth_headers,
         )
@@ -102,7 +104,7 @@ class TestLogs:
         )
         assert response.status_code == 200
         data = response.json()
-        assert len(data) >= 2
+        assert len(data["data"]) >= 2
 
     def test_get_logs_by_pet(self, client: TestClient, auth_headers, pet_and_task):
         """Test getting logs for a specific pet"""
@@ -113,7 +115,7 @@ class TestLogs:
             json={
                 "task_id": task_id,
                 "date": str(date.today()),
-                "status": "DONE",
+                "status": "done",
             },
             headers=auth_headers,
         )
@@ -134,23 +136,24 @@ class TestLogs:
             json={
                 "task_id": task_id,
                 "date": str(date.today()),
-                "status": "DONE",
+                "status": "done",
             },
             headers=auth_headers,
         )
         log_id = create_resp.json()["id"]
 
+        # Upsert: same (task_id, date) with different status
         response = client.post(
             "/api/v1/logs/",
             json={
                 "task_id": task_id,
                 "date": str(date.today()),
-                "status": "SKIPPED",
+                "status": "skipped",
             },
             headers=auth_headers,
         )
         assert response.status_code == 201
-        assert response.json()["status"] == "SKIPPED"
+        assert response.json()["status"] == "skipped"
 
     def test_delete_log_success(
         self, client: TestClient, auth_headers, pet_and_task
@@ -163,7 +166,7 @@ class TestLogs:
             json={
                 "task_id": task_id,
                 "date": str(date.today()),
-                "status": "DONE",
+                "status": "done",
             },
             headers=auth_headers,
         )
@@ -181,7 +184,7 @@ class TestLogs:
             json={
                 "task_id": task_id,
                 "date": str(date.today()),
-                "status": "DONE",
+                "status": "done",
             },
         )
         assert response.status_code == 403

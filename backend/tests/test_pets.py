@@ -11,7 +11,9 @@ class TestPets:
         """Test listing pets when none exist"""
         response = client.get("/api/v1/pets/", headers=auth_headers)
         assert response.status_code == 200
-        assert response.json() == []
+        data = response.json()
+        assert data["data"] == []
+        assert data["pagination"]["total"] == 0
 
     def test_create_pet_success(self, client: TestClient, auth_headers):
         """Test creating a pet"""
@@ -60,9 +62,9 @@ class TestPets:
         response = client.get("/api/v1/pets/", headers=auth_headers)
         assert response.status_code == 200
         data = response.json()
-        assert len(data) == 2
-        assert data[0]["name"] == "Pet1"
-        assert data[1]["name"] == "Pet2"
+        assert len(data["data"]) == 2
+        assert data["data"][0]["name"] == "Pet1"
+        assert data["data"][1]["name"] == "Pet2"
 
     def test_get_pet_success(self, client: TestClient, auth_headers):
         """Test getting a specific pet"""

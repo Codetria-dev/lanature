@@ -12,7 +12,7 @@ from unittest.mock import patch, MagicMock
 
 from fastapi.testclient import TestClient
 from app.main import app
-from app.database import Base, engine, get_db
+from app.database import Base, get_db
 from app.models import User, Pet, Routine
 from app.auth import get_password_hash, create_access_token
 from app.domain.backup_service import BackupService
@@ -23,13 +23,15 @@ from app.domain.backup_service import BackupService
 # ============================================================================
 
 @pytest.fixture
-def client():
-    """FastAPI test client."""
-    return TestClient(app)
+def client(db):
+    """FastAPI test client with overridden database."""
+    app.dependency_overrides[get_db] = lambda: db
+    yield TestClient(app)
+    app.dependency_overrides.clear()
 
 
 @pytest.fixture
-def admin_user(db_session):
+def admin_user(db):
     """Create admin user for testing."""
     admin = User(
         name="Admin User",
@@ -38,9 +40,9 @@ def admin_user(db_session):
         is_superuser=True,
         is_active=True
     )
-    db_session.add(admin)
-    db_session.commit()
-    db_session.refresh(admin)
+    db.add(admin)
+    db.commit()
+    db.refresh(admin)
     return admin
 
 
@@ -57,7 +59,7 @@ def admin_headers(admin_token):
 
 
 @pytest.fixture
-def regular_user(db_session):
+def regular_user(db):
     """Create regular user for testing."""
     user = User(
         name="Regular User",
@@ -66,9 +68,9 @@ def regular_user(db_session):
         is_superuser=False,
         is_active=True
     )
-    db_session.add(user)
-    db_session.commit()
-    db_session.refresh(user)
+    db.add(user)
+    db.commit()
+    db.refresh(user)
     return user
 
 
@@ -85,7 +87,7 @@ def regular_user_headers(regular_user_token):
 
 
 @pytest.fixture
-def sample_data(db_session, admin_user):
+def sample_data(db, admin_user):
     """Create sample data for backup testing."""
     pet = Pet(
         user_id=admin_user.id,
@@ -93,15 +95,15 @@ def sample_data(db_session, admin_user):
         species="cat",
         breed="Persian"
     )
-    db_session.add(pet)
-    db_session.commit()
-    db_session.refresh(pet)
+    db.add(pet)
+    db.commit()
+    db.refresh(pet)
 
     routine = Routine(
         pet_id=pet.id
     )
-    db_session.add(routine)
-    db_session.commit()
+    db.add(routine)
+    db.commit()
 
     return {"pet": pet, "routine": routine, "user": admin_user}
 

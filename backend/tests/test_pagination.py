@@ -33,7 +33,7 @@ class TestPaginationHelper:
 
         # Invalid page (should fail)
         with pytest.raises(ValueError):
-            PaginationParams(page=0)
+            PaginationParams(page=-1)
 
     def test_paginate_first_page(self, db: Session, test_user):
         """Test pagination on first page"""
@@ -229,7 +229,7 @@ class TestPaginationEndpoints:
             log = RoutineLog(
                 task_id=task.id,
                 date=(datetime.now() - timedelta(days=i)).date(),
-                status="DONE"
+                status="done"
             )
             db.add(log)
         db.commit()

@@ -126,6 +126,13 @@ class ImageService:
                 square.save(filepath, "WEBP", quality=COMPRESS_QUALITY)
                 saved_files[size_name] = filename
 
+            # Save a copy as image.webp for backward compatibility
+            # (PetImage component resolves sizes from this base URL)
+            preview_file = pet_dir / saved_files['preview']
+            image_webp = pet_dir / "image.webp"
+            if preview_file.exists():
+                shutil.copy2(preview_file, image_webp)
+
             return {
                 "image_url": f"/api/v1/uploads/pets/{pet_id}/image.webp",
                 "sizes": {

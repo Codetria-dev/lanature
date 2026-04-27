@@ -12,6 +12,7 @@ Architectural decisions:
 
 from pydantic import BaseModel, EmailStr, model_validator
 from datetime import datetime, date, time
+import datetime as _dt  # Use alias to avoid Pydantic v2 field name shadowing
 from typing import Optional, List
 from app.models import ReminderType, Frequency, ReminderLogStatus
 from app.constants import RoutineLogStatus, UserRole
@@ -91,8 +92,10 @@ class PetResponse(BaseModel):
     birth_date: Optional[date]
     weight: Optional[float]
     notes: Optional[str]
+    image_url: Optional[str] = None
+    image_updated_at: Optional[datetime] = None
     created_at: datetime
-    
+
     class Config:
         from_attributes = True
 
@@ -129,7 +132,7 @@ class RoutineTaskUpdate(BaseModel):
     type: Optional[str] = None
     task_type: Optional[str] = None
     frequency: Optional[str] = None
-    time: Optional[time] = None
+    time: Optional[_dt.time] = None  # Use _dt.time to avoid Pydantic v2 field name shadowing
     active: Optional[bool] = None
     is_active: Optional[bool] = None
 
@@ -189,8 +192,7 @@ class ReminderUpdate(BaseModel):
     description: Optional[str] = None
     reminder_type: Optional[ReminderType] = None
     frequency: Optional[Frequency] = None
-    time: Optional[time] = None
-    days_of_week: Optional[List[int]] = None
+    time: Optional[_dt.time] = None  # Use _dt.time to avoid Pydantic v2 field name shadowing    days_of_week: Optional[List[int]] = None
     is_active: Optional[bool] = None
 
 class ReminderResponse(BaseModel):
@@ -245,6 +247,7 @@ class AdminUserResponse(BaseModel):
 class AdminStatsResponse(BaseModel):
     total_users: int
     total_pets: int
+    total_routines: int
     total_active_routines: int
     routines_completed_today: int
     active_users_last_7_days: int

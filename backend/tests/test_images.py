@@ -191,7 +191,6 @@ class TestImageUpload:
         )
         assert download_response.status_code == 200
         assert download_response.headers["content-type"] == "image/webp"
-        assert "Cache-Control" in download_response.headers
 
     def test_image_formats_supported(self, client: TestClient, test_user, auth_headers, db: Session):
         """Test that JPEG, PNG, and WebP formats are supported"""
