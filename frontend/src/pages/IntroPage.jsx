@@ -48,13 +48,13 @@ export default function IntroPage() {
 
   return (
     <div className="fixed inset-0 bg-gradient-to-br from-green-400 via-green-500 to-green-600 flex items-center justify-center overflow-hidden">
-      {/* Ondas de fundo animadas */}
+      {/* Animated background waves */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-white/10 animate-wave" />
         <div className="absolute bottom-0 left-0 right-0 h-1/4 bg-white/5 animate-wave-delayed" />
       </div>
 
-      {/* Partículas de fundo animadas */}
+      {/* Animated background particles */}
       <div className="absolute inset-0 overflow-hidden">
         {[...Array(15)].map((_, i) => (
           <div
@@ -70,9 +70,9 @@ export default function IntroPage() {
         ))}
       </div>
 
-      {/* Conteúdo principal */}
+      {/* Main content */}
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-        {/* Logo/Nome com animação */}
+        {/* Logo/Name with animation */}
         <div
           className={`transition-all duration-1000 ease-out ${
             showLogo
@@ -86,7 +86,7 @@ export default function IntroPage() {
           </div>
         </div>
 
-        {/* Ícone de pata animado */}
+        {/* Animated paw icon */}
         <div
           className={`transition-all duration-700 delay-300 ${
             showPaw
@@ -126,7 +126,7 @@ export default function IntroPage() {
           />
         </div>
 
-        {/* Botão pular */}
+        {/* Skip button */}
         <button
           onClick={handleSkip}
           className="mt-8 text-white/80 hover:text-white text-sm font-medium transition-all duration-200 hover:scale-105 active:scale-95"
@@ -135,7 +135,7 @@ export default function IntroPage() {
         </button>
       </div>
 
-      {/* Estilos de animação inline */}
+      {/* Inline animation styles */}
       <style>{`
         @keyframes float {
           0%, 100% {

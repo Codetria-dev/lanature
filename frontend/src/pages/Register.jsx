@@ -46,7 +46,7 @@ export default function Register() {
             {t('auth.registerSubtitle')}{' '}
             <Link
               to={ROUTES.LOGIN}
-              className="font-medium text-green-600 hover:text-green-500"
+              className="font-medium text-brand-500 hover:text-brand-600"
             >
               {t('auth.alreadyHaveAccount')}
             </Link>

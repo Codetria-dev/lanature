@@ -48,17 +48,18 @@ export const useLogs = (filters = {}) => {
     }
   }
 
-  const updateLog = async (id, logData) => {
+  const updateLog = async (_id, logData) => {
     try {
-      // The API updates or creates the log automatically
+      // The API upserts logs by (task_id, date) — POST creates or updates
       const response = await api.post('/logs/', {
         task_id: logData.task_id,
         date: logData.date,
         status: logData.status
       })
-      setLogs(logs.map(log =>
-        log.id === id ? response.data : log
-      ))
+      // Replace any existing entry with same (task_id, date)
+      setLogs(logs.filter(log =>
+        !(log.task_id === logData.task_id && log.date === logData.date)
+      ).concat([response.data]))
       return { success: true, data: response.data }
     } catch (err) {
       const errorMsg = err.response?.data?.detail || 'Error updating log'

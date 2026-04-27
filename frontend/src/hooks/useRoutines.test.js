@@ -12,7 +12,7 @@ describe('useRoutines Hook', () => {
   })
 
   it('API mock is configured', async () => {
-    const { default: api } = await import('../services/api')
+    const { api } = await import('../services/api')
     expect(api).toBeDefined()
   })
 })

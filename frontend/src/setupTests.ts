@@ -1,5 +1,6 @@
 import { expect, afterEach, beforeAll, afterAll, vi } from 'vitest'
 import { cleanup } from '@testing-library/react'
+import '@testing-library/jest-dom/vitest'
 
 // Cleanup after each test
 afterEach(() => {
@@ -21,12 +22,13 @@ Object.defineProperty(window, 'matchMedia', {
   })),
 })
 
-// Mock localStorage
+// Mock localStorage with working storage
+const localStorageStore: Record<string, string> = {}
 const localStorageMock = {
-  getItem: vi.fn(),
-  setItem: vi.fn(),
-  removeItem: vi.fn(),
-  clear: vi.fn(),
+  getItem: vi.fn((key: string) => localStorageStore[key] ?? null),
+  setItem: vi.fn((key: string, value: string) => { localStorageStore[key] = value }),
+  removeItem: vi.fn((key: string) => { delete localStorageStore[key] }),
+  clear: vi.fn(() => { Object.keys(localStorageStore).forEach(key => delete localStorageStore[key]) }),
 }
 global.localStorage = localStorageMock as any
 

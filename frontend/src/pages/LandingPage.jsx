@@ -12,7 +12,7 @@ export default function LandingPage() {
         <div className="container-custom">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
-              <span className="text-2xl font-bold text-green-600">{t('appName')}</span>
+              <span className="text-2xl font-bold text-brand-500">{t('appName')}</span>
             </div>
             <div className="flex items-center space-x-4">
               <LanguageSelector />
@@ -34,7 +34,7 @@ export default function LandingPage() {
         <div className="text-center">
           <h1 className="text-5xl font-extrabold text-gray-900 sm:text-6xl">
             {t('landing.title')}
-            <span className="text-green-600"> {t('landing.titleHighlight')}</span>
+            <span className="text-brand-500"> {t('landing.titleHighlight')}</span>
           </h1>
           <p className="mt-6 text-xl text-gray-500 max-w-3xl mx-auto">
             {t('landing.subtitle')}
@@ -47,8 +47,8 @@ export default function LandingPage() {
         </div>
 
         <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8">
-          <Card shadow={false} className="text-center bg-gradient-to-br from-green-50 to-emerald-50 shadow-lg hover:shadow-xl transition-all duration-300 border border-green-100">
-            <h3 className="text-xl font-semibold mb-2 text-green-800">{t('landing.features.what.title')}</h3>
+          <Card shadow={false} className="text-center bg-gradient-to-br from-brand-50 to-emerald-50 shadow-lg hover:shadow-xl transition-all duration-300 border border-brand-100">
+            <h3 className="text-xl font-semibold mb-2 text-brand-800">{t('landing.features.what.title')}</h3>
             <p className="text-gray-700">
               {t('landing.features.what.description')}
             </p>

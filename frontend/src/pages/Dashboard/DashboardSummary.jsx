@@ -48,7 +48,7 @@ export default function DashboardSummary({ routines, pets, logs }) {
           {plural('dashboard.summary.petsRegistered', petsCount)}
         </span>
         {lastActivity && (
-          <span className="text-gray-500">
+          <span className="text-gray-600">
             {lastActivity.text}
           </span>
         )}

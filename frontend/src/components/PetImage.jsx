@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import { api } from '../services/api';
 
 export function PetImage({ pet, size = 'preview', className = '', loading = 'lazy' }) {
   const getSizeVariant = (baseUrl, sizeType) => {
@@ -92,31 +93,26 @@ export function PetImageUpload({ petId, currentImageUrl, onUploadSuccess, onUplo
       };
       reader.readAsDataURL(file);
 
-      // Upload file
+      // Upload file via axios
       const formData = new FormData();
       formData.append('file', file);
 
-      const response = await fetch(`/api/v1/pets/${petId}/image`, {
-        method: 'POST',
-        body: formData,
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
+      const response = await api.post(`/pets/${petId}/image`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.detail || 'Upload failed');
-      }
-
-      const data = await response.json();
-      onUploadSuccess?.(data);
+      onUploadSuccess?.(response.data);
     } catch (err) {
-      setError(err.message || 'Upload failed');
+      const message = err.response?.data?.detail || err.message || 'Upload failed';
+      setError(message);
       onUploadError?.(err);
       setPreview(currentImageUrl);
     } finally {
       setLoading(false);
+      // Reset file input so the same file can be re-selected
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
     }
   };
 
@@ -125,21 +121,13 @@ export function PetImageUpload({ petId, currentImageUrl, onUploadSuccess, onUplo
 
     setLoading(true);
     try {
-      const response = await fetch(`/api/v1/pets/${petId}/image`, {
-        method: 'DELETE',
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to delete image');
-      }
+      await api.delete(`/pets/${petId}/image`);
 
       setPreview(null);
       onUploadSuccess?.({ image_url: null });
     } catch (err) {
-      setError(err.message);
+      const message = err.response?.data?.detail || err.message || 'Failed to delete image';
+      setError(message);
       onUploadError?.(err);
     } finally {
       setLoading(false);

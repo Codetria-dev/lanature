@@ -1,6 +1,6 @@
 import en from './en.json'
-import pt from './pt.json'
 import enUx from './en/ux.json'
+import pt from './pt.json'
 import ptUx from './pt/ux.json'
 
 // Merge UX copy into main translations
@@ -71,12 +71,12 @@ export const t = (key, params = {}) => {
   // Handle pluralization
   if (params.count !== undefined) {
     const count = params.count
-    if (typeof value === 'object' && value.one && value.other) {
-      value = count === 1 ? value.one : value.other
-    } else if (typeof value === 'object' && value.zero && value.one && value.other) {
+    if (typeof value === 'object' && value.zero !== undefined && value.one && value.other) {
       if (count === 0) value = value.zero
       else if (count === 1) value = value.one
       else value = value.other
+    } else if (typeof value === 'object' && value.one && value.other) {
+      value = count === 1 ? value.one : value.other
     }
   }
   
@@ -127,12 +127,65 @@ export const formatNumber = (number, options = {}) => {
   return new Intl.NumberFormat(locale, options).format(number)
 }
 
+// Relative time formatting
+export const formatRelativeTime = (date) => {
+  if (!date) return ''
+
+  const dateObj = date instanceof Date ? date : new Date(date)
+  if (isNaN(dateObj.getTime())) return ''
+
+  const now = new Date()
+  const diffInSeconds = Math.floor((now - dateObj) / 1000)
+  const diffInMinutes = Math.floor(diffInSeconds / 60)
+  const diffInHours = Math.floor(diffInMinutes / 60)
+  const diffInDays = Math.floor(diffInHours / 24)
+  const diffInWeeks = Math.floor(diffInDays / 7)
+  const diffInMonths = Math.floor(diffInDays / 30)
+  const diffInYears = Math.floor(diffInDays / 365)
+
+  // Future dates
+  if (diffInSeconds < 0) {
+    const absDiffInSeconds = Math.abs(diffInSeconds)
+    const absDiffInMinutes = Math.floor(absDiffInSeconds / 60)
+    const absDiffInHours = Math.floor(absDiffInMinutes / 60)
+    const absDiffInDays = Math.floor(absDiffInHours / 24)
+
+    if (absDiffInSeconds < 60) {
+      return 'in a few seconds'
+    } else if (absDiffInMinutes < 60) {
+      return `in ${absDiffInMinutes} ${absDiffInMinutes === 1 ? 'minute' : 'minutes'}`
+    } else if (absDiffInHours < 24) {
+      return `in ${absDiffInHours} ${absDiffInHours === 1 ? 'hour' : 'hours'}`
+    } else {
+      return `in ${absDiffInDays} ${absDiffInDays === 1 ? 'day' : 'days'}`
+    }
+  }
+
+  // Past dates
+  if (diffInSeconds < 60) {
+    return 'just now'
+  } else if (diffInMinutes < 60) {
+    return `${diffInMinutes} ${diffInMinutes === 1 ? 'minute' : 'minutes'} ago`
+  } else if (diffInHours < 24) {
+    return `${diffInHours} ${diffInHours === 1 ? 'hour' : 'hours'} ago`
+  } else if (diffInDays < 7) {
+    return `${diffInDays} ${diffInDays === 1 ? 'day' : 'days'} ago`
+  } else if (diffInWeeks < 4) {
+    return `${diffInWeeks} ${diffInWeeks === 1 ? 'week' : 'weeks'} ago`
+  } else if (diffInMonths < 12) {
+    return `${diffInMonths} ${diffInMonths === 1 ? 'month' : 'months'} ago`
+  } else {
+    return `${diffInYears} ${diffInYears === 1 ? 'year' : 'years'} ago`
+  }
+}
+
 export default {
   t,
   plural,
   formatDate,
   formatDateShort,
   formatNumber,
+  formatRelativeTime,
   setLanguage,
   getLanguage,
   getLocale

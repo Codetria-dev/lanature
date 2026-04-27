@@ -98,7 +98,7 @@ export default function Pets() {
           title={t('pets.title')}
           action={openModal}
           actionLabel={t('pets.add')}
-          actionClassName="!bg-[#7fa653] hover:!bg-[#6a8a45] text-white shadow-md hover:shadow-lg font-semibold"
+          actionClassName="bg-brand-500 hover:bg-brand-600 text-white shadow-md hover:shadow-lg font-semibold"
         />
 
         {error && (
@@ -109,11 +109,12 @@ export default function Pets() {
 
         {pets.length === 0 ? (
         <EmptyState
+          icon="pets"
           title={t('pets.none')}
           description={t('pets.startAdding')}
           action={openModal}
           actionLabel={t('pets.addFirst')}
-          actionClassName="!bg-[#7fa653] hover:!bg-[#6a8a45] text-white"
+          actionClassName="bg-brand-500 hover:bg-brand-600 text-white"
         />
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

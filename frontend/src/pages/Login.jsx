@@ -43,7 +43,7 @@ export default function Login() {
             {t('auth.loginSubtitle')}{' '}
             <Link
               to={ROUTES.REGISTER}
-              className="font-medium text-green-600 hover:text-green-500"
+              className="font-medium text-brand-500 hover:text-brand-600"
             >
               {t('auth.createAccount')}
             </Link>

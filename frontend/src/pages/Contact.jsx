@@ -123,7 +123,7 @@ export default function Contact() {
                 type="submit"
                 loading={loading}
                 loadingText={t('loadingStates.sendingMessage')}
-                className="!bg-[#7fa653] hover:!bg-[#6a8a45] text-white"
+                className="bg-brand-500 hover:bg-brand-600 text-white"
               >
                 {t('contact.sendMessage')}
               </Button>

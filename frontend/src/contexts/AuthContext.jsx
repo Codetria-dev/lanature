@@ -20,21 +20,47 @@ export const AuthProvider = ({ children }) => {
     if (token) {
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`
       fetchUser()
+    } else if (localStorage.getItem('refresh_token')) {
+      // No access token but refresh token exists — try silent session restore
+      restoreSession()
     } else {
       setLoading(false)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  const restoreSession = async () => {
+    try {
+      const response = await api.post('/auth/refresh', {
+        refresh_token: localStorage.getItem('refresh_token')
+      })
+      const { access_token, refresh_token: newRefreshToken } = response.data
+      localStorage.setItem('token', access_token)
+      if (newRefreshToken) {
+        localStorage.setItem('refresh_token', newRefreshToken)
+      }
+      api.defaults.headers.common['Authorization'] = `Bearer ${access_token}`
+      await fetchUser()
+    } catch (e) {
+      localStorage.removeItem('token')
+      localStorage.removeItem('refresh_token')
+      setUser(null)
+      setLoading(false)
+    }
+  }
 
   const fetchUser = async () => {
     try {
       const response = await api.get('/auth/me')
       setUser(response.data)
     } catch (error) {
-      // 401 ou 403 = token inválido ou usuário sem permissão
-      // Remove token e limpa estado
-      localStorage.removeItem('token')
-      delete api.defaults.headers.common['Authorization']
-      setUser(null)
+      // 401/403 — the api.js interceptor will try to refresh automatically.
+      // If the retry after refresh also fails, clean up local state.
+      if (!localStorage.getItem('token')) {
+        localStorage.removeItem('refresh_token')
+        delete api.defaults.headers.common['Authorization']
+        setUser(null)
+      }
     } finally {
       setLoading(false)
     }
@@ -45,9 +71,12 @@ export const AuthProvider = ({ children }) => {
       email,
       password
     })
-    const { access_token } = response.data
+    const { access_token, refresh_token } = response.data
 
     localStorage.setItem('token', access_token)
+    if (refresh_token) {
+      localStorage.setItem('refresh_token', refresh_token)
+    }
     api.defaults.headers.common['Authorization'] = `Bearer ${access_token}`
 
     await fetchUser()
@@ -65,14 +94,20 @@ export const AuthProvider = ({ children }) => {
       email,
       password
     })
-    
+
     // After registration, automatically log in
     await login(email, password)
     return response.data
   }
 
-  const logout = () => {
+  const logout = async () => {
+    try {
+      await api.post('/auth/logout')
+    } catch (e) {
+      // Ignore server errors (e.g. token already expired) — still clear local state
+    }
     localStorage.removeItem('token')
+    localStorage.removeItem('refresh_token')
     delete api.defaults.headers.common['Authorization']
     setUser(null)
   }

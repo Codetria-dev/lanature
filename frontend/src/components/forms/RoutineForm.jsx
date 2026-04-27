@@ -118,15 +118,15 @@ const RoutineForm = ({
         error={errors.time}
       />
 
-      <div className="flex items-center">
+      <div className="flex items-center gap-2">
         <input
           type="checkbox"
           id="active"
-          className="mr-2"
           checked={formData.active}
           onChange={(e) => setFormData({ ...formData, active: e.target.checked })}
+          className="w-4 h-4 rounded border-gray-300 text-brand-500 focus:ring-brand-500 cursor-pointer transition-all duration-150"
         />
-        <label htmlFor="active" className="text-sm font-medium text-gray-700">
+        <label htmlFor="active" className="text-sm font-medium text-gray-700 select-none cursor-pointer">
           {t('forms.activeRoutine')}
         </label>
       </div>
@@ -136,7 +136,7 @@ const RoutineForm = ({
           type="submit"
           loading={loading}
           loadingText={routine ? t('loadingStates.updatingTask') : t('loadingStates.creatingTask')}
-          className="flex-1 !bg-[#7fa653] hover:!bg-[#6a8a45] text-white"
+          className="flex-1"
         >
           {routine ? t('forms.update') : t('forms.save')}
         </Button>
@@ -145,7 +145,7 @@ const RoutineForm = ({
           variant="secondary"
           onClick={onCancel}
           disabled={loading}
-          className="flex-1 !bg-[#cfe0bc] hover:!bg-[#b8d09f] text-gray-800"
+          className="flex-1"
         >
           {t('forms.cancel')}
         </Button>

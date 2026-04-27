@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import Modal from './Modal'
+import Modal from './ui/Modal'
 
 describe('Modal Component', () => {
   it('renders modal when isOpen is true', () => {
@@ -51,8 +51,8 @@ describe('Modal Component', () => {
         <div>Content</div>
       </Modal>
     )
-    const modal = container.querySelector('[role="dialog"]')
-    expect(modal.className).toContain('lg')
+    const modal = container.querySelector('.bg-white')
+    expect(modal.className).toContain('max-w-2xl')
   })
 
   it('calls onClose when backdrop is clicked', async () => {

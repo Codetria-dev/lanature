@@ -161,11 +161,13 @@ export default function History() {
 
         {logs.length === 0 ? (
         <EmptyState
+          icon="history"
           title={t('history.noRecords')}
           description={t('history.noRecordsDescription')}
         />
       ) : petsWithLogs.length === 0 ? (
         <EmptyState
+          icon="history"
           title={t('history.noRecords')}
           description={t('history.noRecordsDescription')}
         />
@@ -176,7 +178,7 @@ export default function History() {
             if (petLogs.length === 0) return null
 
             return (
-              <Card key={pet.id} className="border-l-4 border-l-gray-400">
+              <Card key={pet.id} className="border-l-4 border-l-brand-300">
                 <Card.Header className="pb-3 border-b border-gray-200">
                   <div className="flex items-center gap-3">
                     <div>

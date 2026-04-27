@@ -78,6 +78,11 @@
     "startAdding": "Start by adding a pet",
     "bornOn": "Born on",
     "notFound": "Pet not found",
+    "count": {
+      "zero": "No pets",
+      "one": "pet",
+      "other": "pets"
+    },
     "onboarding": {
       "title": "Let's get started",
       "description": "Add your first pet to begin creating care routines and tracking health.",
@@ -118,6 +123,11 @@
     "inactiveCannotComplete": "This task is paused. Activate it to mark as done.",
     "taskUnmarked": "Task unchecked.",
     "taskMarkedCompleted": "Nice work! Task marked as done.",
+    "count": {
+      "zero": "No tasks",
+      "one": "task",
+      "other": "tasks"
+    },
     "onboarding": {
       "title": "Nothing here yet",
       "description": "Create your first care task and start building consistency.",

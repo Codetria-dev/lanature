@@ -79,7 +79,7 @@ const PetForm = ({
           type="submit"
           loading={loading}
           loadingText={pet ? t('loadingStates.updatingPet') : t('loadingStates.addingPet')}
-          className="flex-1 !bg-[#7fa653] hover:!bg-[#6a8a45] text-white"
+          className="flex-1"
         >
           {pet ? t('forms.update') : t('forms.save')}
         </Button>
@@ -88,7 +88,7 @@ const PetForm = ({
           variant="secondary"
           onClick={onCancel}
           disabled={loading}
-          className="flex-1 !bg-[#cfe0bc] hover:!bg-[#b8d09f] text-gray-800"
+          className="flex-1"
         >
           {t('forms.cancel')}
         </Button>

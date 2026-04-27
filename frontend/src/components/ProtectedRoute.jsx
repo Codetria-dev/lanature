@@ -3,22 +3,22 @@ import { useAuth } from '../contexts/AuthContext'
 import { t } from '../i18n'
 
 /**
- * ProtectedRoute - Componente para proteger rotas que requerem autenticação
- * 
- * Verifica:
- * 1. Usuário está logado
- * 2. Token válido (verificado via AuthContext)
- * 3. Role específica (se requiredRole for fornecido)
- * 
+ * ProtectedRoute - Component to protect routes that require authentication
+ *
+ * Checks:
+ * 1. User is logged in
+ * 2. Valid token (verified via AuthContext)
+ * 3. Required role (if requiredRole is specified)
+ *
  * @param {Object} props
- * @param {React.ReactNode} props.children - Componente a ser renderizado se autorizado
- * @param {string} [props.requiredRole] - Role requerida ('admin' ou undefined para qualquer usuário logado)
- * @param {string} [props.redirectTo] - Rota para redirecionar se não autorizado (padrão: '/login' ou '/dashboard')
+ * @param {React.ReactNode} props.children - Component to render if authorized
+ * @param {string} [props.requiredRole] - Required role ('admin' or undefined for any logged-in user)
+ * @param {string} [props.redirectTo] - Route to redirect if not authorized (default: '/login' or '/dashboard')
  */
 export default function ProtectedRoute({ children, requiredRole, redirectTo }) {
   const { user, loading } = useAuth()
 
-  // Mostra loading enquanto verifica autenticação
+  // Shows loading while checking authentication
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -30,20 +30,20 @@ export default function ProtectedRoute({ children, requiredRole, redirectTo }) {
     )
   }
 
-  // 1. Verifica se usuário está logado
+  // 1. Check if user is logged in
   if (!user) {
     return <Navigate to="/login" replace />
   }
 
-  // 2. Verifica role específica (se necessário)
+  // 2. Check required role (if specified)
   if (requiredRole === 'admin') {
-    // Verifica se é admin (is_superuser === true)
+    // Check if user is admin (is_superuser === true)
     if (user.is_superuser !== true) {
-      // Não é admin → redireciona para dashboard
+      // Not admin → redirect to dashboard
       return <Navigate to={redirectTo || '/dashboard'} replace />
     }
   }
 
-  // 3. Usuário autorizado → renderiza children
+  // 3. User authorized → render children
   return children
 }

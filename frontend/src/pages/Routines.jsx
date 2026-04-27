@@ -224,7 +224,7 @@ export default function Routines() {
           title={t('routines.title')}
           action={() => openModal()}
           actionLabel={t('routines.addTask')}
-          actionClassName="!bg-[#7fa653] hover:!bg-[#6a8a45] text-white shadow-md hover:shadow-lg font-semibold"
+          actionClassName="bg-brand-500 hover:bg-brand-600 text-white shadow-md hover:shadow-lg font-semibold"
           isProminent={routines.length === 0 && pets.length > 0}
         />
 
@@ -236,6 +236,7 @@ export default function Routines() {
 
         {pets.length === 0 ? (
         <EmptyState
+          icon="routines"
           title={t('routines.noPetsYet')}
           description={t('routines.noPetsDescription')}
         />
