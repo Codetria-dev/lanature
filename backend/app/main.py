@@ -53,13 +53,10 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://lanature.vercel.app",
-        "http://localhost:3000",
-        "http://localhost:5173",
-        "http://localhost:5174",  # Vite dev server sometimes uses this port
-        "http://127.0.0.1:3000",
-        "http://127.0.0.1:5173",
-        "http://127.0.0.1:5174",
+        "https://lanature-2dpfi4t83-codetria-devs-projects.vercel.app",  # Current frontend URL
+        "https://lanature.vercel.app",  # Desired domain URL
+        "http://localhost:5174",  # Local development
+        "http://localhost:3000",  # Local fallback
     ],
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
