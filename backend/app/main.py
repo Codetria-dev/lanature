@@ -49,19 +49,13 @@ app = FastAPI(
     redoc_url="/api/v1/redoc",
 )
 
-# ================== CORS CONFIGURATION (MUST BE FIRST) ==================
+# ================== CORS CONFIGURATION ==================
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "https://lanature-2dpfi4t83-codetria-devs-projects.vercel.app",  # Current frontend URL
-        "https://lanature.vercel.app",  # Desired domain URL
-        "http://localhost:5174",  # Local development
-        "http://localhost:3000",  # Local fallback
-    ],
+    allow_origins=["*"],  # Aceita qualquer domínio (resolve o problema da URL dinâmica)
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+    allow_methods=["*"],
     allow_headers=["*"],
-    expose_headers=["*"],
 )
 
 app.state.limiter = limiter
