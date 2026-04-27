@@ -4,7 +4,7 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed_on-Vercel-000000?logo=vercel&logoColor=white)]
 
-# 🌿 LaNature - Pet Care Management SaaS
+#  LaNature - Pet Care Management SaaS
 
 > A comprehensive SaaS platform for managing your pets' daily care routines, medications, and health tracking.
 
