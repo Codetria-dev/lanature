@@ -22,6 +22,14 @@ build/
 *.swp
 *.swo
 *~
+.cursor/
+.cursorrules
+.windsurfrules
+.kiro/
+.opencode.json
+
+# Cache
+.pytest_cache/
 
 # Node
 node_modules/
@@ -45,3 +53,9 @@ Thumbs.db
 # Uploaded files (Phase 5)
 backend/uploads/
 uploads/
+
+# Backups
+backend/backups/
+
+# Added by code-review-graph
+.code-review-graph/
