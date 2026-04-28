@@ -4,7 +4,7 @@ import Button from '../components/ui/Button'
 import Alert from '../components/ui/Alert'
 import Input from '../components/ui/Input'
 import ListSkeleton from '../components/ui/ListSkeleton'
-import { api } from '../services/api'
+import api from '../services/api'
 import { t, formatDateShort } from '../i18n'
 import { MESSAGES } from '../constants'
 
