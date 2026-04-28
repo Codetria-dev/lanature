@@ -52,9 +52,9 @@ app = FastAPI(
 # ================== CORS CONFIGURATION ==================
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Aceita qualquer domínio (resolve o problema da URL dinâmica)
-    allow_credentials=True,
-    allow_methods=["*"],
+    allow_origins=["*"],                    # Accepts any domain
+    allow_credentials=False,                # ⚠️ Must be False when using "*"
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
 
