@@ -98,5 +98,5 @@ def root():
     return {"message": "LaNature API"}
 
 @app.get("/health")
-def health():
-    return {"status": "ok"}
+async def health():
+    return {"status": "ok", "message": "Service is running"}
