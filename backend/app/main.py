@@ -50,21 +50,19 @@ app = FastAPI(
 )
 
 # ================== CORS CONFIGURATION ==================
-# Configuração CORS - libera localhost e Railway
 origins = [
     "http://localhost:5173",
     "http://localhost:5174",
     "http://localhost:5175",
-    "http://127.0.0.1:5173",
     "https://lanature.vercel.app",
-    "https://lanature-odygn83qp-codetria-devs-projects.vercel.app",
 ]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
+    allow_origin_regex=r"https://lanature-.*\.vercel\.app",  # Any Vercel preview subdomain
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],  # OPTIONS is required for preflight
     allow_headers=["*"],
 )
 
