@@ -52,15 +52,9 @@ app = FastAPI(
 # ================== CORS CONFIGURATION ==================
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://localhost:5174",
-        "http://localhost:5175",
-        "https://lanature.vercel.app",
-        "https://lanature-*.vercel.app",  # Aceita qualquer subdomínio da Vercel
-    ],
+    allow_origins=["*"],  # Aceita qualquer origem (localhost, Vercel, qualquer URL)
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],  # OPTIONS é crucial
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
@@ -94,9 +88,9 @@ uploads_dir.mkdir(exist_ok=True)
 app.mount("/api/v1/uploads", StaticFiles(directory=str(uploads_dir)), name="uploads")
 
 @app.get("/")
-def root():
-    return {"message": "LaNature API"}
+async def root():
+    return {"message": "LaNature API is running"}
 
 @app.get("/health")
 async def health():
-    return {"status": "ok", "message": "Service is running"}
+    return {"status": "ok", "service": "LaNature API"}
