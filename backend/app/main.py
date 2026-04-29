@@ -52,10 +52,17 @@ app = FastAPI(
 # ================== CORS CONFIGURATION ==================
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Aceita qualquer origem (localhost, Vercel, qualquer URL)
+    allow_origins=[
+        "https://lanature.vercel.app",
+        "https://lanature-*.vercel.app",  # Aceita qualquer subdomínio da Vercel
+        "http://localhost:5173",
+        "http://localhost:5174",
+        "http://localhost:5175",
+    ],
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
+    expose_headers=["*"],
 )
 
 app.state.limiter = limiter
